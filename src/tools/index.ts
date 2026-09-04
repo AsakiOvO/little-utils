@@ -1,6 +1,7 @@
 // src/tools/index.ts — 工具注册表：全站单一事实来源（RESEARCH §Pattern 1）
-// 本计划（01-01）只立契约：tools 初始为空数组；真实工具由 Plan 01-02/01-04 注册。
+// 新增工具 = 加工具目录 + 此处 import + tools 数组一行（Plan 01-02 首次验证）。
 import type { Tool, ToolCategoryId } from './tool'
+import timestampConverter from './timestamp-converter'
 
 export type { Tool, ToolCategoryId, ToolMeta } from './tool'
 export { defineTool, NEW_WINDOW_DAYS } from './tool'
@@ -14,7 +15,7 @@ export const toolCategories: Record<ToolCategoryId, { name: string }> = {
  * 全站单一事实来源：新增工具 = 加目录 + 此处一行。
  * 空注册表是合法状态（派生路由仅含 home + 404，见 ARCH-01/empty 登记假设）。
  */
-export const tools: Tool[] = []
+export const tools: Tool[] = [timestampConverter]
 
 // —— 派生 helpers（消费方只读这些，不碰原始数组）——
 export const toolsByCategory = (): Array<{ id: ToolCategoryId; name: string; tools: Tool[] }> =>
