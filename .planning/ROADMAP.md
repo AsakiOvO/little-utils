@@ -33,7 +33,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. 用户可在时间戳工具中完成 Unix 时间戳与日期时间的双向转换,含时区显示
   3. 每个工具可通过独立 URL 直达、刷新不 404、可直接分享;重依赖不进首屏 bundle(路由级懒加载生效)
   4. 工具输出可一键复制;向工具粘贴含 `<script>`/`<img onerror>` 的内容仅渲染为纯文本,不执行任何脚本(唯一渲染出口 + ESLint 禁 v-html 生效)
-**Plans**: TBD
+**Plans:** 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — 行走骨架：脚手架 + 设计令牌 + 注册表契约与派生路由 + 双布局框架壳（Wave 1）
+- [ ] 01-02-PLAN.md — @lucide/vue 供应链闸门（blocking-human）+ 时间戳转换工具端到端 + useCopy（Wave 2）
+- [ ] 01-03-PLAN.md — XSS 消毒渲染管线 + SafeHtml 唯一出口 + ESLint 卡口（Wave 2，与 01-02 并行）
+- [ ] 01-04-PLAN.md — JSON 格式化工具（tokenizer 保真 + CodeMirror + 树视图）+ 分包预算卡口（Wave 3）
 
 ### Phase 2: 设计系统与响应式/可访问性基线
 **Goal**: 用户在任何设备、任何主题下都能舒适使用站点——霓虹设计令牌统一视觉、暗色模式可切换且被记住、移动端输入不缩放、动效可随系统降级;工具操作区由中性基础组件保证克制易读
@@ -136,7 +142,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. 应用骨架与工具注册表契约 | 0/TBD | Not started | - |
+| 1. 应用骨架与工具注册表契约 | 0/4 | Not started | - |
 | 2. 设计系统与响应式/可访问性基线 | 0/TBD | Not started | - |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
