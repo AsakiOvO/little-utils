@@ -1,0 +1,28 @@
+/* Source: tailwindcss.com/docs/colors /docs/theme /docs/dark-mode（Context7 官方文档） */
+/* src/styles/tokens.css */
+@import "tailwindcss";
+
+/* Phase 2 启用类切换暗色；Phase 1 先声明不启用（D-05：Phase 2 只补切换不重做令牌） */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* —— 霓虹原色（oklch，D-04）—— */
+  --color-neon-cyan: oklch(0.85 0.16 195);
+  --color-neon-magenta: oklch(0.72 0.24 330);
+  --color-neon-yellow: oklch(0.92 0.19 105);
+
+  /* —— 暗色语义底（Phase 1 默认主题）—— */
+  --color-bg: oklch(0.16 0.02 260);
+  --color-surface: oklch(0.2 0.025 260);
+  --color-surface-raised: oklch(0.24 0.03 260);
+  --color-text-primary: oklch(0.93 0.01 260);
+  --color-text-muted: oklch(0.65 0.02 260);
+  --color-border: oklch(0.3 0.03 260);
+
+  /* —— 字体 —— */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* —— 发光阴影（静态；动画只碰 opacity/transform）—— */
+  --shadow-glow-cyan: 0 0 12px oklch(0.85 0.16 195 / 0.35);
+  --shadow-glow-magenta: 0 0 12px oklch(0.72 0.24 330 / 0.3);
+}
