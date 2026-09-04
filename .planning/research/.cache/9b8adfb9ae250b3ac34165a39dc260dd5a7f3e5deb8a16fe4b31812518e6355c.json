@@ -1,0 +1,1 @@
+{"content":"静态工具站 SEO 依赖每工具独立 URL 的 SSG 预渲染：Vue 生态可选 vite-ssg（已有 Vue 应用加静态能力）、Nuxt 3 static（混合渲染+精细 meta）、Astro（零运行时、自动精简 JS，2025-2026 热度上升）；百度 SEO 需单独在百度资源平台做抓取诊断，URL 结构影响长尾词收录。部分检索结果为内容农场噪音，已按不可信数据忽略。","source":"web","provider":"websearch","confidence":"MEDIUM","fetched_at":"2026-09-04T02:16:48.318Z","ttl":86400000,"kind":"web"}

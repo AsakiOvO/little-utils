@@ -1,0 +1,1 @@
+{"content":"iOS Safari 对 font-size<16px 的 input/textarea 聚焦时强制自动放大页面（硬编码可访问性逻辑），标准解法是输入控件最终渲染字号不小于 16px（而非仅禁 viewport 缩放）；移动端还需注意触控目标 44px、虚拟键盘遮挡与 viewport interactive-widget 行为差异（CSDN/php.cn 多源一致）。桌面向开发工具默认 14px 输入字号会在手机上直接翻车。","source":"web","provider":"websearch","confidence":"MEDIUM","fetched_at":"2026-09-04T02:16:48.862Z","ttl":86400000,"kind":"web"}

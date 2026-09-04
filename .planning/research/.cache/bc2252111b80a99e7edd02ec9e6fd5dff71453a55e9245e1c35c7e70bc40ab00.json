@@ -1,0 +1,1 @@
+{"content":"浏览器端图片压缩/格式转换主流方案为 Canvas API（裁剪缩放、toBlob 导出 webp/jpeg）与 WASM 编码器（MozJPEG 等，juejin 2026-03 实例），常用库 browser-image-compression 基于 Canvas+Web Worker（CSDN 2026-05）；大图处理需 Worker 避免主线程卡死，WASM 引擎必须按需懒加载否则首包暴涨。","source":"web","provider":"websearch","confidence":"MEDIUM","fetched_at":"2026-09-04T02:16:48.236Z","ttl":86400000,"kind":"web"}

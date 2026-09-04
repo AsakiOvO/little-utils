@@ -1,0 +1,1 @@
+{"content":"W3C WCAG 2.1 Technique C39 与 MDN 明确：动画可触发前庭障碍、癫痫与偏头痛（SC 2.3.3 Animation from Interactions），标准做法是用 prefers-reduced-motion: reduce 媒体查询关闭/替换故障艺术、闪烁、扫描线等动效；霓虹配色需同时满足 WCAG 1.4.3 文本对比度 4.5:1，暗背景上的低亮度霓虹文字常不达标（w3.org、MDN、openreplay 多源一致）。","source":"web","provider":"websearch","confidence":"MEDIUM","fetched_at":"2026-09-04T02:16:48.632Z","ttl":86400000,"kind":"web"}
