@@ -46,5 +46,29 @@ export default defineConfigWithVueTs(
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 
+  // —— ARCH-04 全站唯一 HTML 出口卡口（Plan 01-03，T-01-01 静态封旁路）——
+  // v-html 全局 error；唯一豁免是绑定变量名匹配 ^sanitized，而 sanitized* 命名只能来自
+  // sanitizeHtml() 返回值（SafeHtml 组件专用）——出口被 lint + 命名双重收敛。
+  // innerHTML/insertAdjacentHTML 是 code review 红线的静态化：接收者任意，故用
+  // no-restricted-syntax 的 AST 选择器表达（no-restricted-properties 需固定对象名，无法覆盖任意接收者）。
+  {
+    rules: {
+      'vue/no-v-html': ['error', { ignorePattern: '^sanitized' }],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "MemberExpression[property.name='innerHTML']",
+          message:
+            '禁止直接读写 innerHTML：HTML 字符串必须经 sanitizeHtml() → SafeHtml 组件唯一出口渲染（ARCH-04）',
+        },
+        {
+          selector: "MemberExpression[property.name='insertAdjacentHTML']",
+          message:
+            '禁止 insertAdjacentHTML：HTML 字符串必须经 sanitizeHtml() → SafeHtml 组件唯一出口渲染（ARCH-04）',
+        },
+      ],
+    },
+  },
+
   skipFormatting,
 )
