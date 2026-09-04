@@ -19,6 +19,11 @@ function asObject(tree: TreeNode): Extract<TreeNode, { type: 'object' }> {
   return tree
 }
 
+/** 类型守卫助手：安全提取数字节点的 raw（供无条件 expect 使用） */
+function rawOfNumberNode(node: TreeNode | undefined): string | undefined {
+  return node?.type === 'number' ? node.raw : undefined
+}
+
 /**
  * 测试侧规范化器（黑盒对拍）：移除字符串字面量之外的全部结构空白。
  * 与 tokenizer 的 token 序列视角等价 —— 两侧规范化结果相等 ⇔ 忽略空白后逐 token 相等。
@@ -79,7 +84,7 @@ describe('2^53 数字保真（TOOL-01 核心）', () => {
     const prop = tree.properties[0]
     expect(prop?.key).toBe('orderId')
     expect(prop?.value).toEqual({ type: 'number', raw: '9052710354240385291' })
-    expect(typeof (prop?.value as { raw?: unknown }).raw).toBe('string')
+    expect(typeof rawOfNumberNode(prop?.value)).toBe('string')
   })
 
   it('负数与指数原文保留', () => {
