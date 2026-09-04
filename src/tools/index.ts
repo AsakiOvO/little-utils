@@ -17,13 +17,12 @@ export const toolCategories: Record<ToolCategoryId, { name: string }> = {
 export const tools: Tool[] = []
 
 // —— 派生 helpers（消费方只读这些，不碰原始数组）——
-export function toolsByCategory(): Array<{ id: ToolCategoryId; name: string; tools: Tool[] }> {
-  return Object.entries(toolCategories).map(([id, c]) => ({
+export const toolsByCategory = (): Array<{ id: ToolCategoryId; name: string; tools: Tool[] }> =>
+  Object.entries(toolCategories).map(([id, c]) => ({
     id: id as ToolCategoryId,
     name: c.name,
     tools: tools.filter((t) => t.category === id),
   }))
-}
 
 /**
  * dev 期不变量校验（单元测试 + 路由模块加载即断言）。
