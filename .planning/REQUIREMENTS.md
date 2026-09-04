@@ -27,7 +27,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### 开发辅助工具（Developer Tools）
 
 - [ ] **TOOL-01**: 用户可格式化/压缩/校验 JSON，长数字 ID 不丢失精度（电商场景）
-- [ ] **TOOL-02**: 用户可在 Unix 时间戳与日期时间之间双向转换（含时区显示与日期计算）
+- [x] **TOOL-02**: 用户可在 Unix 时间戳与日期时间之间双向转换（含时区显示与日期计算）
 - [ ] **TOOL-03**: 用户可对字符串与文件进行 Base64 编解码（UTF-8 安全，无中文乱码）
 - [ ] **TOOL-04**: 用户可进行 URL 编解码与解析（encodeURIComponent + URL API）
 - [ ] **TOOL-05**: 用户可生成 UUID v4 与随机字符串
@@ -100,7 +100,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCH-02 | Phase 1 | Pending |
 | ARCH-04 | Phase 1 | Pending |
 | TOOL-01 | Phase 1 | Pending |
-| TOOL-02 | Phase 1 | Pending |
+| TOOL-02 | Phase 1 | Complete |
 | STYL-01 | Phase 2 | Pending |
 | STYL-03 | Phase 2 | Pending |
 | SITE-04 | Phase 2 | Pending |
