@@ -751,20 +751,23 @@ export function useCopy() {
 | A6 | `Intl.supportedValuesOf('timeZone')` 在目标浏览器可用 | Pattern 7 | 降级为常用时区列表 + 手填（实现时特性检测一行代码） |
 | A7 | vite-ssg `includedRoutes` 过滤 `:` 路由后，404 catch-all 不参与预渲染、运行时兜底可用 | Code Examples / vite.config | 若 Phase 1 build 对 catch-all 报错，改为排除该路由或在 Phase 3 一并处理（不阻塞本阶段验收） |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **`@lucide/vue` 安装确认（checkpoint:human-verify）**
    - What we know: lucide-vue-next 弃用声明指向它；同仓库、非弃用、周下载 49.7 万。
    - What's unclear: 图标导出名/按需导入行为是否与旧包逐字一致。
    - Recommendation: 安装前打开包 README 核对一次导入示例（planner 加 checkpoint 任务）。
+   - **RESOLVED:** 由 Plan 01-02 Task 1 闭环——`checkpoint:human-verify`（gate="blocking-human"，永不自动批准）要求人工在 npmjs.com 核对发布者/仓库/README 导入示例后方可安装，Task 2 执行安装。
 2. **vue-tsc 3.3.11 + TS 5.9.3 + Vite 8 的类型检查耗时**
    - What we know: 版本兼容官方声明在案（vue-tsc peer `>=5.0.0`）。
    - What's unclear: 大目录 `tools/` 增长后 type-check 时长。
    - Recommendation: Phase 1 不处理；纳入 Phase 5 批量工具时观察。
+   - **RESOLVED:** 延后裁定——Phase 1 四个计划均不含相关任务（有意不在本阶段处理）；观察点随 Phase 5 批量工具接入一并处理。
 3. **首包体积预算的具体阈值脚本形态**
    - What we know: 项目调研定了"首包 gzip ≤ 200KB"（Phase 3 CI 卡口）。
    - What's unclear: 用 size-limit 还是自写脚本、卡在哪个 chunk。
    - Recommendation: Phase 1 只交付"构建产物 chunk 清单人工核对"（轻量），正式预算卡口随 Phase 3 部署管线交付。
+   - **RESOLVED:** 由 Plan 01-04 Task 3 交付轻量形态 `scripts/check-chunks.mjs`（只断言首包无 CM 泄漏、工具独立 chunk、预渲染页存在，见 01-04 flagged_assumptions）；size-limit 选型与 gzip ≤ 200KB 正式卡口归 Phase 3 ARCH-05。
 
 ## Environment Availability
 
