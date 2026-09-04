@@ -96,13 +96,43 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (待 roadmap 创建后填充) | — | — |
+| ARCH-01 | Phase 1 | Pending |
+| ARCH-02 | Phase 1 | Pending |
+| ARCH-04 | Phase 1 | Pending |
+| TOOL-01 | Phase 1 | Pending |
+| TOOL-02 | Phase 1 | Pending |
+| STYL-01 | Phase 2 | Pending |
+| STYL-03 | Phase 2 | Pending |
+| SITE-04 | Phase 2 | Pending |
+| SITE-05 | Phase 2 | Pending |
+| ARCH-03 | Phase 3 | Pending |
+| ARCH-05 | Phase 3 | Pending |
+| SITE-01 | Phase 4 | Pending |
+| SITE-02 | Phase 4 | Pending |
+| SITE-03 | Phase 4 | Pending |
+| SITE-06 | Phase 4 | Pending |
+| TOOL-03 | Phase 5 | Pending |
+| TOOL-04 | Phase 5 | Pending |
+| TOOL-05 | Phase 5 | Pending |
+| TOOL-06 | Phase 5 | Pending |
+| TOOL-07 | Phase 5 | Pending |
+| TOOL-08 | Phase 5 | Pending |
+| TOOL-09 | Phase 5 | Pending |
+| STYL-02 | Phase 6 | Pending |
+| STYL-04 | Phase 6 | Pending |
+| DIFF-01 | Phase 7 | Pending |
+| DIFF-02 | Phase 7 | Pending |
+| DIFF-03 | Phase 7 | Pending |
+| OFF-01 | Phase 8 | Pending |
+| OFF-02 | Phase 8 | Pending |
+| OFF-03 | Phase 8 | Pending |
+| OFF-04 | Phase 8 | Pending |
 
 **Coverage:**
-- v1 requirements: 27 total
-- Mapped to phases: 0（待 roadmap）
-- Unmapped: 27 ⚠️（roadmap 创建时必须 100% 覆盖）
+- v1 requirements: 31 total(原统计"27"为笔误,按实际条目数修正)
+- Mapped to phases: 31 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-09-04*
-*Last updated: 2026-09-04 after initial definition*
+*Last updated: 2026-09-04 after roadmap creation*
