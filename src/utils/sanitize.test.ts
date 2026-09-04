@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 // src/utils/sanitize.test.ts — ARCH-04 注入样本回归集（CONTEXT <specifics> 验收标准的自动化形态）
 // 验收标准原文：粘贴含 <script>/<img onerror> 的内容仅渲染为纯文本，不执行任何脚本。
 // 无 DOM 环境（vite-ssg 构建 / Node 测试）退化分支为显式覆盖目标（威胁 T-01-08）。
