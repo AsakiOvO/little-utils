@@ -18,7 +18,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### 架构基建（Architecture）
 
-- [ ] **ARCH-01**: 工具注册表契约（defineTool 元数据：name/path/category/keywords/懒加载组件），路由、导航、搜索、收藏校验、sitemap 全部从注册表派生
+- [x] **ARCH-01**: 工具注册表契约（defineTool 元数据：name/path/category/keywords/懒加载组件），路由、导航、搜索、收藏校验、sitemap 全部从注册表派生
 - [ ] **ARCH-02**: 每个工具独立路由并懒加载（路由级代码分割，重依赖不进首屏 bundle）
 - [ ] **ARCH-03**: 构建期 SSG 预渲染每条工具路由为含 SEO meta 的静态 HTML，生成 sitemap.xml 与 robots.txt
 - [ ] **ARCH-04**: 统一 XSS 消毒渲染管线（唯一渲染出口，ESLint 禁止 v-html/innerHTML 直插用户输入）
@@ -96,7 +96,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ARCH-01 | Phase 1 | Pending |
+| ARCH-01 | Phase 1 | Complete |
 | ARCH-02 | Phase 1 | Pending |
 | ARCH-04 | Phase 1 | Pending |
 | TOOL-01 | Phase 1 | Pending |
@@ -129,6 +129,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | OFF-04 | Phase 8 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 31 total(原统计"27"为笔误,按实际条目数修正)
 - Mapped to phases: 31 ✓
 - Unmapped: 0

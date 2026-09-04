@@ -37,12 +37,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. 每个工具可通过独立 URL 直达、刷新不 404、可直接分享;重依赖不进首屏 bundle(路由级懒加载生效)
   4. 工具输出可一键复制;向工具粘贴含 `<script>`/`<img onerror>` 的内容仅渲染为纯文本,不执行任何脚本(唯一渲染出口 + ESLint 禁 v-html 生效)
 
-**Plans:** 4 plans
+**Plans:** 1/4 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — 行走骨架：脚手架 + 设计令牌 + 注册表契约与派生路由 + 双布局框架壳（Wave 1）
+- [x] 01-01-PLAN.md — 行走骨架：脚手架 + 设计令牌 + 注册表契约与派生路由 + 双布局框架壳（Wave 1）
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -175,7 +175,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. 应用骨架与工具注册表契约 | 0/4 | Not started | - |
+| 1. 应用骨架与工具注册表契约 | 1/4 | In Progress|  |
 | 2. 设计系统与响应式/可访问性基线 | 0/TBD | Not started | - |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
