@@ -21,7 +21,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **ARCH-01**: 工具注册表契约（defineTool 元数据：name/path/category/keywords/懒加载组件），路由、导航、搜索、收藏校验、sitemap 全部从注册表派生
 - [ ] **ARCH-02**: 每个工具独立路由并懒加载（路由级代码分割，重依赖不进首屏 bundle）
 - [ ] **ARCH-03**: 构建期 SSG 预渲染每条工具路由为含 SEO meta 的静态 HTML，生成 sitemap.xml 与 robots.txt
-- [ ] **ARCH-04**: 统一 XSS 消毒渲染管线（唯一渲染出口，ESLint 禁止 v-html/innerHTML 直插用户输入）
+- [x] **ARCH-04**: 统一 XSS 消毒渲染管线（唯一渲染出口，ESLint 禁止 v-html/innerHTML 直插用户输入）
 - [ ] **ARCH-05**: 部署管线（EdgeOne Pages + 自定义域名 + 构建产物零第三方外链 + bundle 体积预算检查）
 
 ### 开发辅助工具（Developer Tools）
@@ -98,7 +98,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | ARCH-01 | Phase 1 | Complete |
 | ARCH-02 | Phase 1 | Pending |
-| ARCH-04 | Phase 1 | Pending |
+| ARCH-04 | Phase 1 | Complete |
 | TOOL-01 | Phase 1 | Pending |
 | TOOL-02 | Phase 1 | Complete |
 | STYL-01 | Phase 2 | Pending |
