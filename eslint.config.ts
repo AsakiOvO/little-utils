@@ -31,9 +31,9 @@ export default defineConfigWithVueTs(
   ...pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
 
-  // pages 目录组件按文件路由惯例允许单词名(如 home.vue / not-found.vue)
+  // pages/layouts 目录组件按文件路由/布局惯例允许单词名(如 home.vue / tool.layout.vue)
   {
-    files: ['src/pages/**/*.vue'],
+    files: ['src/pages/**/*.vue', 'src/layouts/**/*.vue'],
     rules: {
       'vue/multi-word-component-names': 'off',
     },

@@ -24,11 +24,11 @@ describe('routes — 注册表纯派生', () => {
     expect(catchAllCount).toBe(1)
   })
 
-  it('空注册表时中间无工具路由段（ARCH-01/empty 假设:仅 home + 404）', () => {
-    if (tools.length === 0) {
-      expect(routes).toHaveLength(2)
-      expect(routes.map((r) => r.path)).toEqual(['/', CATCH_ALL])
-    }
+  it('中间段即工具段,与注册表一一对应（空注册表时仅 home + 404,ARCH-01/empty 假设）', () => {
+    // 无条件不变量:routes = [home, ...tools.map(path), 404];空注册表时中间段为空
+    const middlePaths = routes.slice(1, -1).map((r) => r.path)
+    expect(middlePaths).toEqual(tools.map((t) => t.path))
+    expect(routes).toHaveLength(2 + tools.length)
   })
 
   it('工具路由 meta.layout = "tool" 且 meta.tool 携带完整元数据', () => {
