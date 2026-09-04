@@ -184,12 +184,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useCopy } from '../../composables/useCopy'
-import {
-  detectUnit,
-  fromTimestamp,
-  toTimestamp,
-  type DetectedUnit,
-} from './timestamp-converter.service'
+import { fromTimestamp, toTimestamp, type DetectedUnit } from './timestamp-converter.service'
 
 const { copy, copied } = useCopy()
 // 多行结果各自反馈:记录最后复制行的 key,copied 窗口内该行显示「已复制」

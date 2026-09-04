@@ -5,10 +5,8 @@
 //   - copy 路径由 navigator.permissions.query 状态决定('granted'/'prompt' 走 API)
 // happy-dom 环境:navigator 无 clipboard/permissions,document 无 execCommand——
 // Clipboard API 路径测试以 defineProperty 注入,legacy 路径测试 mock execCommand。
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from 'vitest'
 import { useCopy } from './useCopy'
-
-type MockFn = ReturnType<typeof vi.fn>
 
 function patchNavigator(prop: string, value: unknown): void {
   Object.defineProperty(window.navigator, prop, { value, configurable: true })
@@ -19,14 +17,16 @@ function unpatchNavigator(prop: string): void {
 }
 
 describe('useCopy（Clipboard API 可用路径）', () => {
-  let write: MockFn
-  let query: MockFn
+  let write: Mock<() => Promise<void>>
+  let query: Mock<() => Promise<{ state: string; addEventListener: () => void; removeEventListener: () => void }>>
 
   beforeEach(() => {
     vi.useFakeTimers()
-    write = vi.fn(() => Promise.resolve())
+    write = vi.fn<() => Promise<void>>(() => Promise.resolve())
     // permissionStatus 对象需具备 EventTarget 形状(usePermission 会监听 'change')
-    query = vi.fn(() =>
+    query = vi.fn<
+      () => Promise<{ state: string; addEventListener: () => void; removeEventListener: () => void }>
+    >(() =>
       Promise.resolve({
         state: 'granted',
         addEventListener: () => {},
@@ -85,13 +85,13 @@ describe('useCopy（Clipboard API 可用路径）', () => {
 })
 
 describe('useCopy（legacy 降级路径:无 Clipboard API）', () => {
-  let execCommand: MockFn
+  let execCommand: Mock<() => boolean>
 
   beforeEach(() => {
     vi.useFakeTimers()
     // 不注入 clipboard → isClipboardApiSupported=false → copy 内部走 execCommand 降级
     // legacy:true 的契约意义:isSupported 恒 true,复制能力始终可用
-    execCommand = vi.fn(() => true)
+    execCommand = vi.fn<() => boolean>(() => true)
     document.execCommand = execCommand as unknown as typeof document.execCommand
   })
 
