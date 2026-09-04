@@ -60,9 +60,24 @@
         v-else-if="forwardResult && forwardResult.ok"
         class="flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
       >
-        <p class="font-mono text-sm text-[var(--color-neon-yellow)]">
-          识别为{{ unitLabel(forwardResult.detectedUnit) }} · 原始输入「{{ tsInput }}」
-        </p>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="font-mono text-sm text-[var(--color-neon-yellow)]">
+            识别为{{ unitLabel(forwardResult.detectedUnit) }} · 原始输入「{{ tsInput }}」
+          </p>
+          <button
+            type="button"
+            class="rounded-md border px-2 py-1 text-xs transition-colors"
+            :class="
+              isCopied('__all__')
+                ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
+            "
+            aria-label="复制全部结果文本"
+            @click="copyValue('__all__', forwardFullText)"
+          >
+            {{ isCopied('__all__') ? '已复制' : '复制全部' }}
+          </button>
+        </div>
 
         <div
           v-for="row in forwardRows"
@@ -74,11 +89,16 @@
             <span class="font-mono text-sm text-[var(--color-text-primary)]">{{ row.value }}</span>
             <button
               type="button"
-              class="rounded-md border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]"
+              class="rounded-md border px-2 py-1 text-xs transition-colors"
+              :class="
+                isCopied(row.key)
+                  ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
+              "
               :aria-label="`复制${row.label}`"
-              @click="copy(row.value)"
+              @click="copyValue(row.key, row.value)"
             >
-              复制
+              {{ isCopied(row.key) ? '已复制' : '复制' }}
             </button>
           </span>
         </div>
@@ -143,11 +163,16 @@
             <span class="font-mono text-sm text-[var(--color-text-primary)]">{{ row.value }}</span>
             <button
               type="button"
-              class="rounded-md border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]"
+              class="rounded-md border px-2 py-1 text-xs transition-colors"
+              :class="
+                isCopied(row.key)
+                  ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
+                  : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
+              "
               :aria-label="`复制${row.label}`"
-              @click="copy(row.value)"
+              @click="copyValue(row.key, row.value)"
             >
-              复制
+              {{ isCopied(row.key) ? '已复制' : '复制' }}
             </button>
           </span>
         </div>
@@ -166,7 +191,18 @@ import {
   type DetectedUnit,
 } from './timestamp-converter.service'
 
-const { copy } = useCopy()
+const { copy, copied } = useCopy()
+// 多行结果各自反馈:记录最后复制行的 key,copied 窗口内该行显示「已复制」
+const lastCopiedKey = ref<string | null>(null)
+
+async function copyValue(key: string, value: string): Promise<void> {
+  await copy(value)
+  lastCopiedKey.value = key
+}
+
+function isCopied(key: string): boolean {
+  return copied.value && lastCopiedKey.value === key
+}
 
 // ── 时区选项（A6 特性检测:supportedValuesOf 不可用时降级常用列表 + 手填） ──
 // Intl 调用保持在 setup/函数体内（Pitfall 3 纪律;Node/浏览器均有 Intl,SSG 预渲染安全）
@@ -232,6 +268,22 @@ const forwardRows = computed(() => {
     })
   }
   return rows
+})
+
+// 复制全部:格式化的结果文本行(原始输入 + 识别结论 + 本地/UTC/偏移/时区)
+const forwardFullText = computed(() => {
+  const r = forwardResult.value
+  if (!r?.ok) return ''
+  const lines = [
+    `原始输入：${tsInput.value}`,
+    `识别为：${unitLabel(r.detectedUnit)}`,
+    `本地时间：${r.local ?? ''}`,
+    `UTC 时间：${r.utc ?? ''}`,
+    `UTC 偏移：${r.offset ?? ''}`,
+    `IANA 时区：${r.timeZone ?? ''}`,
+  ]
+  if (r.target) lines.push(`目标时区（${effectiveForwardTz.value}）：${r.target}`)
+  return lines.join('\n')
 })
 
 // ── 反向：日期时间 → 时间戳（输入即算） ──────────────────────
