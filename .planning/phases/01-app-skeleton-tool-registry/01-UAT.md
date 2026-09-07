@@ -30,7 +30,7 @@ result: pass
 
 ## Deferred Follow-Ups
 
-### 5. 真实浏览器端到端注入走查（deferred 至 Phase 5/8）
+#### 5. 真实浏览器端到端注入走查（deferred 至 Phase 5/8 — 非 Phase 1 测试项，不参与 UAT 判定）
 expected: 首个富文本工具接入后，向其粘贴 script/onerror 载荷确认仅渲染纯文本（SafeHtml 当前零消费者属 ARCH-04 结构性设计）
 status: deferred
 idea: "按设计延期：SafeHtml 当前零消费者属 ARCH-04 结构性设计（Phase 1 无富文本渲染工具，无可走查对象），约定 Phase 5/8 首个富文本工具接入时收口；组件级 jsdom 测试（3 用例）已覆盖消毒正确性。不属于 Phase 1 UAT 可测范围（见 01-VERIFICATION.md human_verification 第 5 项）。"
