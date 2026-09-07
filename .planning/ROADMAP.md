@@ -13,7 +13,7 @@
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: 应用骨架与工具注册表契约** - Vite+Vue3+TS+Tailwind 脚手架、defineTool 注册表派生路由、XSS 消毒渲染管线,以 JSON 格式化 + 时间戳转换 2 个工具验证契约
+- [x] **Phase 1: 应用骨架与工具注册表契约** - Vite+Vue3+TS+Tailwind 脚手架、defineTool 注册表派生路由、XSS 消毒渲染管线,以 JSON 格式化 + 时间戳转换 2 个工具验证契约 (completed 2026-09-07)
 - [ ] **Phase 2: 设计系统与响应式/可访问性基线** - 三层设计令牌(对比度校验)、暗色模式、16px/44px 移动端规则、reduced-motion 降级、基础组件库
 - [ ] **Phase 3: 预渲染 SEO 与部署管线** - vite-ssg 每路由静态 HTML + meta、sitemap/robots、EdgeOne Pages 公网部署、零外链与体积预算
 - [ ] **Phase 4: 站点级体验(首页/搜索/收藏)** - 分类导航首页、fuse.js 搜索、收藏/最近使用、隐私声明
@@ -37,7 +37,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. 每个工具可通过独立 URL 直达、刷新不 404、可直接分享;重依赖不进首屏 bundle(路由级懒加载生效)
   4. 工具输出可一键复制;向工具粘贴含 `<script>`/`<img onerror>` 的内容仅渲染为纯文本,不执行任何脚本(唯一渲染出口 + ESLint 禁 v-html 生效)
 
-**Plans:** 4/4 executed + 1 gap-closure plan (01-05) pending
+**Plans:** 5/5 plans complete
 
 Plans:
 **Wave 1**
@@ -179,7 +179,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. 应用骨架与工具注册表契约 | 5/5 | In Progress|  |
+| 1. 应用骨架与工具注册表契约 | 5/5 | Complete    | 2026-09-07 |
 | 2. 设计系统与响应式/可访问性基线 | 0/TBD | Not started | - |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
