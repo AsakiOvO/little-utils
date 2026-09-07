@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 current_phase: 1
 current_phase_name: 应用骨架与工具注册表契约
 status: verifying
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-09-07T01:59:53.503Z"
+stopped_at: Completed 01-05-PLAN.md (gap closure)
+last_updated: "2026-09-07T07:00:22.565Z"
 last_activity: 2026-09-04
 last_activity_desc: Phase 1 execution started
-state_head: 9632a6943b76f13e90f93d1f877b79151cb2e5fe
+state_head: 35daf2581feaf31f4a07a8a086dad583238d6f8c
 progress:
   total_phases: 8
   completed_phases: 0
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 5
+  completed_plans: 5
   percent: 0
 ---
 
@@ -28,9 +28,9 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 ## Current Position
 
 Phase: 1 (应用骨架与工具注册表契约) — EXECUTING
-Plan: 4 of 4
+Plan: 5 of 5（含 gap closure 01-05；4 个原计划 + 1 个验证缺口闭合计划全部完成）
 Status: Phase complete — ready for verification
-Last activity: 2026-09-04 — Phase 1 execution started
+Last activity: 2026-09-07 — 01-05 gap closure 执行完成（CR-01/WR-01-04 闭合）
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -62,6 +62,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P02 | 37 min | 3 tasks | 9 files |
 | Phase 01 P03 | 23 min | 2 tasks | 8 files |
 | Phase 01 P04 | 14 min | 3 tasks | 9 files |
+| Phase 01 P05 | 13 min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,9 @@ Recent decisions affecting current work:
 - [Phase 1]: 01-04: check-chunks 首包定义 = 入口页 dist/index.html 的 chunk 可达闭包（BFS 含 import{...}from/export-from/dynamic import 链）——vite-ssg 平铺产物下工具页 modulepreload 自己的工具 chunk 属期望懒加载行为，不属共享首屏 — 01-04: check-chunks 首包定义 = 入口页 dist/index.html 的 chunk 可达闭包（BFS 含 import{...}from/export-from/dynamic import 链）——vite-ssg 平铺产物下工具页 modulepreload 自己的工具 chunk 属期望懒加载行为，不属共享首屏
 - [Phase 1]: 01-04: CM 泄漏断言按页分组：入口页可达集零 CM；工具页可达集的 CM chunk 文件名必须以该工具 slug 开头（堵住经 useCopy 类共享异步 chunk 中转的泄漏路径） — 01-04: CM 泄漏断言按页分组：入口页可达集零 CM；工具页可达集的 CM chunk 文件名必须以该工具 slug 开头（堵住经 useCopy 类共享异步 chunk 中转的泄漏路径）
 - [Phase 1]: 01-04: fail-first 验证采用产物层注入模拟——src 层探针（副作用 import / void 绑定）因 CM 库 tree-shakeable 被消除；共享层"导入但不使用"CM 天然不进产物，对 ARCH-02 是一层免费防护 — 01-04: fail-first 验证采用产物层注入模拟——src 层探针（副作用 import / void 绑定）因 CM 库 tree-shakeable 被消除；共享层"导入但不使用"CM 天然不进产物，对 ARCH-02 是一层免费防护
+- [Phase 01]: isValidTimeZone 守卫置于 service 层（V7 契约位置），UI 零改动只消费 ok:false — Intl 调用收敛函数体内维持 Pitfall 3 预渲染纪律；错误文案仅内插 tz 本身
+- [Phase 01]: check-chunks 工具路由唯一来源 = jiti 实载注册表模块，双源消除 — ARCH-01 构建脚本侧不变量恢复；断言 a-d 语义零改动经失败方向探针实证
+- [Phase 01]: 测试文件就近 *.test.ts 布局接入 type-check 与 vitest lint；删除空 lib 覆盖恢复继承 DOM lib — 9/9 测试文件纳入保障面；type-check 一次通过零修复实证 lib 选择正确
 
 ### Pending Todos
 
@@ -98,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-09-07T01:57:50.060Z
-Stopped at: Completed 01-04-PLAN.md
+Last session: 2026-09-07T06:55:45.815Z
+Stopped at: Completed 01-05-PLAN.md (gap closure)
 Resume file: None

@@ -55,7 +55,7 @@ Plans:
 
 **Wave 4** *(gap closure — 验证缺口 CR-01/WR-01 + 评审警告 WR-02/03/04)*
 
-- [ ] 01-05-PLAN.md — 缺口闭合：时间戳非法时区白屏修复（CR-01）+ detectUnit trim（WR-01）+ 测试基建路径错位（WR-02/03）+ check-chunks 注册表派生（WR-04）（Wave 4）
+- [x] 01-05-PLAN.md — 缺口闭合：时间戳非法时区白屏修复（CR-01）+ detectUnit trim（WR-01）+ 测试基建路径错位（WR-02/03）+ check-chunks 注册表派生（WR-04）（Wave 4）
 
 ### Phase 2: 设计系统与响应式/可访问性基线
 
@@ -179,7 +179,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. 应用骨架与工具注册表契约 | 4/4 | In Progress|  |
+| 1. 应用骨架与工具注册表契约 | 5/5 | In Progress|  |
 | 2. 设计系统与响应式/可访问性基线 | 0/TBD | Not started | - |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
