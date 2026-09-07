@@ -83,3 +83,42 @@ describe('毫秒往返一致性', () => {
     expect(roundTrip.ms).toBe(1735689600000)
   })
 })
+
+describe('非法时区结构化错误（CR-01：V7 不裸抛契约）', () => {
+  it('fromTimestamp 非法时区 UTC+8 返回 ok:false 结构化错误且全字段 null', () => {
+    const r = fromTimestamp('0', 'UTC+8')
+    expect(r.ok).toBe(false)
+    expect(r.error).toContain('未知时区')
+    expect(r.error).toContain('Asia/Shanghai')
+    expect(r.detectedUnit).toBeNull()
+    expect(r.local).toBeNull()
+    expect(r.utc).toBeNull()
+    expect(r.offset).toBeNull()
+    expect(r.timeZone).toBeNull()
+    expect(r.target).toBeNull()
+  })
+
+  it('fromTimestamp 毫秒输入 + 反例时区 Foo/Bar 返回 ok:false 且不抛异常', () => {
+    const r = fromTimestamp('1735689600000', 'Foo/Bar')
+    expect(r.ok).toBe(false)
+    expect(r.error).toBeTruthy()
+  })
+
+  it('toTimestamp 非法时区 Foo/Bar 返回 ok:false 结构化错误且 ms/sec null', () => {
+    const r = toTimestamp('2025-01-01 08:00:00', 'Foo/Bar')
+    expect(r.ok).toBe(false)
+    expect(r.error).toContain('未知时区')
+    expect(r.ms).toBeNull()
+    expect(r.sec).toBeNull()
+  })
+})
+
+describe('带空白识别（WR-01：trim 收窄防 1000 倍错判）', () => {
+  it('10 位秒级输入带前后空格仍识别为秒', () => {
+    expect(detectUnit(' 1735689600 ')).toBe('s')
+  })
+
+  it('13 位毫秒输入带制表符与换行仍识别为毫秒', () => {
+    expect(detectUnit('\t1735689600000\n')).toBe('ms')
+  })
+})
