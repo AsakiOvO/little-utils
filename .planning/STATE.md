@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 current_phase: 1
 current_phase_name: 应用骨架与工具注册表契约
-status: executing
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-09-04T09:33:06.827Z"
+status: verifying
+stopped_at: Completed 01-04-PLAN.md
+last_updated: "2026-09-07T01:59:53.503Z"
 last_activity: 2026-09-04
 last_activity_desc: Phase 1 execution started
-state_head: 091c6de4b43be6fb8919842aa94a443ccc98a582
+state_head: 9632a6943b76f13e90f93d1f877b79151cb2e5fe
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
   percent: 0
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 
 Phase: 1 (应用骨架与工具注册表契约) — EXECUTING
 Plan: 4 of 4
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-09-04 — Phase 1 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -61,6 +61,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P01 | 31 min | 3 tasks | 28 files |
 | Phase 01 P02 | 37 min | 3 tasks | 9 files |
 | Phase 01 P03 | 23 min | 2 tasks | 8 files |
+| Phase 01 P04 | 14 min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,9 @@ Recent decisions affecting current work:
 - [Phase 1]: 01-02: @lucide/vue 1.39.0 经 blocking-human 供应链闸门人工批准后安装(D-06 落地),lucide-vue-next 弃用包未混入
 - [Phase 1]: 01-02: 『加目录 + 注册表一行』工具接入模式首次真实验证,routes.ts 零改动(Phase 5 批量样板)
 - [Phase 1]: 01-02: useCopy 测试按 VueUse 14.4.0 真实语义锁定(legacy:true 下 isSupported 恒 true,降级为内部路径切换),修正计划旧版库假设
+- [Phase 1]: 01-04: check-chunks 首包定义 = 入口页 dist/index.html 的 chunk 可达闭包（BFS 含 import{...}from/export-from/dynamic import 链）——vite-ssg 平铺产物下工具页 modulepreload 自己的工具 chunk 属期望懒加载行为，不属共享首屏 — 01-04: check-chunks 首包定义 = 入口页 dist/index.html 的 chunk 可达闭包（BFS 含 import{...}from/export-from/dynamic import 链）——vite-ssg 平铺产物下工具页 modulepreload 自己的工具 chunk 属期望懒加载行为，不属共享首屏
+- [Phase 1]: 01-04: CM 泄漏断言按页分组：入口页可达集零 CM；工具页可达集的 CM chunk 文件名必须以该工具 slug 开头（堵住经 useCopy 类共享异步 chunk 中转的泄漏路径） — 01-04: CM 泄漏断言按页分组：入口页可达集零 CM；工具页可达集的 CM chunk 文件名必须以该工具 slug 开头（堵住经 useCopy 类共享异步 chunk 中转的泄漏路径）
+- [Phase 1]: 01-04: fail-first 验证采用产物层注入模拟——src 层探针（副作用 import / void 绑定）因 CM 库 tree-shakeable 被消除；共享层"导入但不使用"CM 天然不进产物，对 ARCH-02 是一层免费防护 — 01-04: fail-first 验证采用产物层注入模拟——src 层探针（副作用 import / void 绑定）因 CM 库 tree-shakeable 被消除；共享层"导入但不使用"CM 天然不进产物，对 ARCH-02 是一层免费防护
 
 ### Pending Todos
 
@@ -94,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-09-04T09:33:06.817Z
-Stopped at: Completed 01-03-PLAN.md
+Last session: 2026-09-07T01:57:50.060Z
+Stopped at: Completed 01-04-PLAN.md
 Resume file: None

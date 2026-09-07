@@ -19,14 +19,14 @@ Requirements for initial release. Each maps to roadmap phases.
 ### 架构基建（Architecture）
 
 - [x] **ARCH-01**: 工具注册表契约（defineTool 元数据：name/path/category/keywords/懒加载组件），路由、导航、搜索、收藏校验、sitemap 全部从注册表派生
-- [ ] **ARCH-02**: 每个工具独立路由并懒加载（路由级代码分割，重依赖不进首屏 bundle）
+- [x] **ARCH-02**: 每个工具独立路由并懒加载（路由级代码分割，重依赖不进首屏 bundle）
 - [ ] **ARCH-03**: 构建期 SSG 预渲染每条工具路由为含 SEO meta 的静态 HTML，生成 sitemap.xml 与 robots.txt
 - [x] **ARCH-04**: 统一 XSS 消毒渲染管线（唯一渲染出口，ESLint 禁止 v-html/innerHTML 直插用户输入）
 - [ ] **ARCH-05**: 部署管线（EdgeOne Pages + 自定义域名 + 构建产物零第三方外链 + bundle 体积预算检查）
 
 ### 开发辅助工具（Developer Tools）
 
-- [ ] **TOOL-01**: 用户可格式化/压缩/校验 JSON，长数字 ID 不丢失精度（电商场景）
+- [x] **TOOL-01**: 用户可格式化/压缩/校验 JSON，长数字 ID 不丢失精度（电商场景）
 - [x] **TOOL-02**: 用户可在 Unix 时间戳与日期时间之间双向转换（含时区显示与日期计算）
 - [ ] **TOOL-03**: 用户可对字符串与文件进行 Base64 编解码（UTF-8 安全，无中文乱码）
 - [ ] **TOOL-04**: 用户可进行 URL 编解码与解析（encodeURIComponent + URL API）
@@ -97,9 +97,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | ARCH-01 | Phase 1 | Complete |
-| ARCH-02 | Phase 1 | Pending |
+| ARCH-02 | Phase 1 | Complete |
 | ARCH-04 | Phase 1 | Complete |
-| TOOL-01 | Phase 1 | Pending |
+| TOOL-01 | Phase 1 | Complete |
 | TOOL-02 | Phase 1 | Complete |
 | STYL-01 | Phase 2 | Pending |
 | STYL-03 | Phase 2 | Pending |
