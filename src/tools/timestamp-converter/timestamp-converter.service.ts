@@ -48,11 +48,29 @@ export interface ToTimestampResult {
  * 正则限整数（含负数）；空/非数字/超 14 位一律 invalid。
  */
 export function detectUnit(ts: string): DetectedUnit {
-  if (!/^-?\d+$/.test(ts.trim())) return 'invalid'
-  const len = ts.replace('-', '').length
+  // 单一 trim 后变量:合法性正则与位数判定必须基于同一形态（WR-01:原实现
+  // 位数判定用未 trim 原串，' 1735689600 ' 因空白凑位数被 1000 倍错判为 ms）。
+  const s = ts.trim()
+  if (!/^-?\d+$/.test(s)) return 'invalid'
+  const len = s.replace('-', '').length
   if (len <= 11) return 's'
   if (len <= 14) return 'ms'
   return 'invalid'
+}
+
+/**
+ * IANA 时区名合法性校验（CR-01 Fix）：非法名传入 dayjs.tz 会抛
+ * RangeError（"Invalid time zone specified: …"）→ 在渲染期 computed 中
+ * 触发整页白屏。此处以 Intl 特性检测收敛为布尔，调用方转为结构化错误。
+ * Intl 调用只在函数体内（Pitfall 3：vite-ssg 预渲染 Node 环境安全）。
+ */
+function isValidTimeZone(tz: string): boolean {
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: tz })
+    return true
+  } catch {
+    return false
+  }
 }
 
 /**
@@ -75,6 +93,20 @@ export function fromTimestamp(ts: string, tz?: string): FromTimestampResult {
   }
 
   // unit 已收窄为 's' | 'ms'；≤14 位整数经 Number 转换无精度损失（< 2^53）
+  // tz 守卫（CR-01）：校验顺序先单位后时区；非法时区绝不到达 d.tz()（否则
+  // RangeError 从渲染期 computed 抛出 → 组件树卸载 → 整页白屏）。
+  if (tz !== undefined && !isValidTimeZone(tz)) {
+    return {
+      ok: false,
+      error: `未知时区：「${tz}」，请输入 IANA 时区名（如 Asia/Shanghai）。`,
+      detectedUnit: null,
+      local: null,
+      utc: null,
+      offset: null,
+      timeZone: null,
+      target: null,
+    }
+  }
   const d = unit === 's' ? dayjs.unix(Number(ts)) : dayjs(Number(ts))
   return {
     ok: true,
@@ -90,6 +122,15 @@ export function fromTimestamp(ts: string, tz?: string): FromTimestampResult {
 
 /** 日期时间 → 时间戳（毫秒与秒两种粒度）；可选目标时区（IANA 名）解析。 */
 export function toTimestamp(input: string, tz?: string): ToTimestampResult {
+  // tz 守卫（CR-01）：非法时区绝不让其到达 dayjs.tz（会抛 RangeError）。
+  if (tz !== undefined && !isValidTimeZone(tz)) {
+    return {
+      ok: false,
+      error: `未知时区：「${tz}」，请输入 IANA 时区名（如 Asia/Shanghai）。`,
+      ms: null,
+      sec: null,
+    }
+  }
   const d = tz ? dayjs.tz(input, tz) : dayjs(input)
   if (!d.isValid()) {
     return {
