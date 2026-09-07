@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite-ssg build",
+    "check:chunks": "node scripts/check-chunks.mjs",
     "type-check": "vue-tsc --build",
     "lint": "run-s \"lint:*\"",
     "lint:oxlint": "oxlint . --fix",
