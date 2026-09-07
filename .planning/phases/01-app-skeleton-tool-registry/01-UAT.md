@@ -28,18 +28,22 @@ result: pass
 expected: 从首页进入任一工具页（应切至克制 tool 布局，含返回首页导航与 max-w 容器），返回首页（应切回强风格 home 布局）；tool 区零 glow/动画侵入
 result: pass
 
+## Deferred Follow-Ups
+
 ### 5. 真实浏览器端到端注入走查（deferred 至 Phase 5/8）
 expected: 首个富文本工具接入后，向其粘贴 script/onerror 载荷确认仅渲染纯文本（SafeHtml 当前零消费者属 ARCH-04 结构性设计）
-result: skipped
+status: deferred
+idea: "按设计延期：SafeHtml 当前零消费者属 ARCH-04 结构性设计（Phase 1 无富文本渲染工具，无可走查对象），约定 Phase 5/8 首个富文本工具接入时收口；组件级 jsdom 测试（3 用例）已覆盖消毒正确性。不属于 Phase 1 UAT 可测范围（见 01-VERIFICATION.md human_verification 第 5 项）。"
+deferred_at: 2026-09-07
 reason: "按计划 deferred：SafeHtml 当前零消费者属 ARCH-04 结构性设计，约定 Phase 5/8 首个富文本工具接入时收口；组件级 jsdom 测试已覆盖消毒正确性"
 
 ## Summary
 
-total: 5
+total: 4
 passed: 4
 issues: 0
 pending: 0
-skipped: 1
+skipped: 0
 blocked: 0
 
 ## Gaps
