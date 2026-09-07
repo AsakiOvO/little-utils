@@ -1,15 +1,20 @@
 {
   "extends": "./tsconfig.app.json",
 
-  // Override to include only test files and clear exclusions.
+  // Override to include test files and clear exclusions.
+  // Tests live next to their sources as *.test.ts (WR-02: the scaffold's
+  // __tests__/ dir convention matched no file in this repo); the __tests__
+  // glob is kept for the scaffold layout convention.
   // Application code imported in tests is automatically included via module resolution.
-  "include": ["src/**/__tests__/*", "env.d.ts"],
+  "include": ["src/**/*.test.ts", "src/**/__tests__/*", "env.d.ts"],
   "exclude": [],
 
   "compilerOptions": {
     // Vitest runs in a different environment than the application code.
-    // Adjust lib and types accordingly.
-    "lib": [],
+    // Adjust types accordingly; lib stays inherited from
+    // @vue/tsconfig/tsconfig.dom.json (ESNext + DOM + DOM.Iterable) — an
+    // empty-array lib override here would strip DOM libs from tests using
+    // document/navigator and produce phantom type errors.
     "types": ["node"],
 
     // `vue-tsc --build` produces a .tsbuildinfo file for incremental type-checking.

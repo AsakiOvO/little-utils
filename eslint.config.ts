@@ -39,9 +39,13 @@ export default defineConfigWithVueTs(
     },
   },
 
+  // Vitest 可靠性规则应用到全部测试文件（WR-03:就近 *.test.ts 布局 + 脚手架
+  // __tests__ 约定双模式）。其后置的 pluginOxlint.buildFromOxlintConfigFile 块
+  // 会把 oxlint 已覆盖的重叠规则置 off（委托给 lint:oxlint 原生强制），此处
+  // 激活的是 oxlint 未覆盖项（如 no-identical-title、no-focused-tests 等）。
   {
     ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*'],
+    files: ['src/**/__tests__/*', 'src/**/*.test.ts'],
   },
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
