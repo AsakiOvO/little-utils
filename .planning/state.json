@@ -1,0 +1,53 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": null,
+  "phases": [
+    {
+      "number": "1",
+      "name": "应用骨架与工具注册表契约",
+      "status": "complete"
+    },
+    {
+      "number": "2",
+      "name": "设计系统与响应式/可访问性基线",
+      "status": "pending"
+    },
+    {
+      "number": "3",
+      "name": "预渲染 SEO 与部署管线",
+      "status": "pending"
+    },
+    {
+      "number": "4",
+      "name": "站点级体验(首页/搜索/收藏)",
+      "status": "pending"
+    },
+    {
+      "number": "5",
+      "name": "开发辅助工具批量补齐",
+      "status": "pending"
+    },
+    {
+      "number": "6",
+      "name": "赛博朋克视觉强化(首页/导航)",
+      "status": "pending"
+    },
+    {
+      "number": "7",
+      "name": "差异化增强(URL 状态/命令面板/PWA)",
+      "status": "pending"
+    },
+    {
+      "number": "8",
+      "name": "办公效率双线第一批",
+      "status": "pending"
+    }
+  ],
+  "next": {
+    "command": "/gsd:progress --next",
+    "label": "Advance to the next step (plan phase 2)",
+    "reason": "Phase 2 of 8 — needs a plan"
+  },
+  "updated_at": "2026-09-07T08:11:04.198Z"
+}

@@ -43,3 +43,4 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+.planning/research/.cache/

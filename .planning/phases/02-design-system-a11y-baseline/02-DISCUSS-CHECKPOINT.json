@@ -1,0 +1,83 @@
+{
+  "phase": "2",
+  "phase_name": "设计系统与响应式/可访问性基线",
+  "timestamp": "2026-09-07T00:00:00.000Z",
+  "areas_completed": ["主题切换行为", "亮色主题视觉基调", "基础组件库清单"],
+  "areas_remaining": ["基线如何验证"],
+  "decisions": {
+    "主题切换行为": [
+      {
+        "question": "首次访问（localStorage 无记录）呈现什么主题？",
+        "answer": "跟随系统偏好，无系统偏好时回落暗色",
+        "options_presented": ["跟随系统（推荐）", "一律暗色"]
+      },
+      {
+        "question": "切换控件几态？",
+        "answer": "三态：暗/亮/跟随系统，任何时刻可回到自动模式",
+        "options_presented": ["两态：暗⇄亮（推荐）", "三态：暗/亮/系统"]
+      },
+      {
+        "question": "切换控件位置与形态？",
+        "answer": "双 layout 顶栏右上角循环图标按钮（月亮/太阳/显示器），点击在 暗→亮→跟随系统 间循环",
+        "options_presented": ["双 layout 顶栏图标按钮（推荐）", "双 layout 顶栏三段控件", "仅工具页顶栏"]
+      },
+      {
+        "question": "跟随系统态下系统偏好变化是否实时生效？",
+        "answer": "实时联动：跟随态下系统变化立即生效；手动选择后系统变化不影响，直到切回跟随态",
+        "options_presented": ["跟随态实时联动（推荐）", "仅加载时读取一次"]
+      },
+      {
+        "question": "进站防闪烁（FOUC）方案？",
+        "answer": "head 内联阻塞脚本在首屏绘制前读 localStorage 挂 .dark 类与 color-scheme，零闪烁；保持 vite-ssg mounted 纪律",
+        "options_presented": ["head 内联脚本同步设置（推荐）", "Vue 挂载后切换"]
+      },
+      {
+        "question": "CodeMirror 编辑器亮色主题处理？",
+        "answer": "EditorView.theme 定制亮色配色（背景/文字对齐站点亮色令牌），语法高亮随主题切换",
+        "options_presented": ["定制亮色 CodeMirror 主题（推荐）", "编辑器保持暗色", "Phase 2 先暗色后补"]
+      },
+      {
+        "question": "亮色令牌设计策略？",
+        "answer": "浅冷灰底（260 色相偏离纯白）+ 深霓虹双色体系：霓虹三色加深降饱和（青→深青蓝、品红→深紫红）满足 4.5:1；暗色令牌值一字不动",
+        "options_presented": ["浅底+深霓虹双色体系（推荐）", "白底+仅文字深色化", "亮色大幅降饱和白天模式"]
+      },
+      {
+        "question": "发光效果在亮色主题下保留吗？",
+        "answer": "保留但降强度：透明度降低、颜色换深霓虹血统；大面积滥用留给 Phase 6 装饰层",
+        "options_presented": ["保留但降强度（推荐）", "亮色完全去掉发光"]
+      },
+      {
+        "question": "三层设计令牌怎么分？",
+        "answer": "原语层（霓虹三色+中性灰阶，不直接用于页面）→ 语义层（bg/surface/text/border 等角色，亮暗双套映射原语）→ 组件层（仅在需要时建，不强制）",
+        "options_presented": ["原语→语义→组件（推荐）", "原语→语义→主题映射层", "由 planner/researcher 定"]
+      },
+      {
+        "question": "主题切换瞬间的颜色过渡？",
+        "answer": "瞬切，无全局过渡动画",
+        "options_presented": ["瞬切（推荐）", "全局短过渡"]
+      },
+      {
+        "question": "亮色主题下电光黄怎么处理？",
+        "answer": "加深降饱和为琥珀/金褐色，保持三色血统齐整",
+        "options_presented": ["加深降饱和为琥珀色（推荐）", "亮色下黄色仅作装饰"]
+      },
+      {
+        "question": "是否补齐 success/warning/danger 功能语义色？",
+        "answer": "补齐三色 + 对应背景/边框变体，亮暗双套；基础组件错误态直接消费",
+        "options_presented": ["补齐三色（推荐）", "暂不补"]
+      },
+      {
+        "question": "亮色 CodeMirror 底色？",
+        "answer": "编辑器底色 = surface 语义色，背景/选区/行高亮对齐站点语义令牌，语法高亮用深霓虹三色+中性色",
+        "options_presented": ["编辑器底色 = surface 语义色（推荐）", "编辑器底色独立偏白纸感"]
+      },
+      {
+        "question": "D-05「暗色令牌一字不动」的边界？",
+        "answer": "允许机制性搬迁：值不变，仅文件组织/映射方式调整（搬进 .dark 选择器）；D-05 本意是不重新设计暗色配色",
+        "options_presented": ["允许机制性搬迁（推荐）", "严格不动"]
+      }
+    ]
+  },
+  "deferred_ideas": [],
+  "canonical_refs": [".planning/PROJECT.md", ".planning/REQUIREMENTS.md", ".planning/ROADMAP.md", ".planning/research/STACK.md", ".planning/research/PITFALLS.md"]
+}
