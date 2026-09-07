@@ -37,7 +37,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. 每个工具可通过独立 URL 直达、刷新不 404、可直接分享;重依赖不进首屏 bundle(路由级懒加载生效)
   4. 工具输出可一键复制;向工具粘贴含 `<script>`/`<img onerror>` 的内容仅渲染为纯文本,不执行任何脚本(唯一渲染出口 + ESLint 禁 v-html 生效)
 
-**Plans:** 4/4 plans executed
+**Plans:** 4/4 executed + 1 gap-closure plan (01-05) pending
 
 Plans:
 **Wave 1**
@@ -52,6 +52,10 @@ Plans:
 **Wave 3** *(blocked on Wave 2 completion)*
 
 - [x] 01-04-PLAN.md — JSON 格式化工具（tokenizer 保真 + CodeMirror + 树视图）+ 分包预算卡口（Wave 3）
+
+**Wave 4** *(gap closure — 验证缺口 CR-01/WR-01 + 评审警告 WR-02/03/04)*
+
+- [ ] 01-05-PLAN.md — 缺口闭合：时间戳非法时区白屏修复（CR-01）+ detectUnit trim（WR-01）+ 测试基建路径错位（WR-02/03）+ check-chunks 注册表派生（WR-04）（Wave 4）
 
 ### Phase 2: 设计系统与响应式/可访问性基线
 
