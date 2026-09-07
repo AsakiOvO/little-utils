@@ -15,17 +15,26 @@
 //   d) 断言每个工具路由的预渲染页存在
 //      （vite-ssg 平铺形态 dist/<route>.html 或目录形态 dist/<route>/index.html 均认可，
 //       平铺为 vite-ssg 默认产物 —— 01-02 SUMMARY 已裁定）。
-// 零第三方依赖（仅 node: 内置）；任一断言失败打印 VIOLATION: 行并 exit 1；
+// 构建期脚本：除 node: 内置外仅使用 devDependency jiti 加载注册表模块；
+// 任一断言失败打印 VIOLATION: 行并 exit 1；
 // 全部通过打印 'OK: chunk budget pass' 并 exit 0。
+// 工具路由清单改由注册表派生（WR-04：消除「与 src/tools 注册表一致」的人肉同步）。
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createJiti } from 'jiti'
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const distDir = join(repoRoot, 'dist')
 
-/** 需要确认预渲染页存在的工具路由（与 src/tools 注册表一致） */
-const TOOL_ROUTES = ['json-formatter', 'timestamp-converter']
+// —— 工具路由清单唯一来源 = 注册表模块（ARCH-01 构建脚本侧不变量）——
+// 经 jiti 加载 src/tools/index.ts（以脚本自身 URL 为解析基准，jiti 负责 TS
+// 转译与无扩展名相对导入解析），取 tools[].path 去前导斜杠后喂给断言 d。
+// 注册表模块顶层必须保持 Node 安全（Pitfall 3 纪律——与 vite-ssg build 同等
+// 信任面，违纪会在本脚本 fail-fast）。
+const jiti = createJiti(import.meta.url)
+const registry = await jiti.import('../src/tools/index.ts')
+const TOOL_ROUTES = registry.tools.map((t) => t.path.replace(/^\//, ''))
 
 const violations = []
 
