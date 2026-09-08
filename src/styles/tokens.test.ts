@@ -44,15 +44,13 @@ function contrastRatio(fg: string, bg: string): number {
   return (hi + 0.05) / (lo + 0.05)
 }
 
-/** D-20 红线断言:文字用途色对 ≥ 4.5:1 */
-function expectContrastAtLeast(fg: string, bg: string): void {
-  const ratio = contrastRatio(fg, bg)
-  expect(
-    ratio,
+/** D-20 红线失败消息(修复指引内联,改色即红时可直接照做) */
+function contrastFailHint(fg: string, bg: string, ratio: number): string {
+  return (
     `色对 ${fg}(前景)vs ${bg}(背景)对比度 ${ratio.toFixed(2)}:1 < 4.5:1 —— ` +
-      'D-20 红线。调色仅允许在 D-07 策略内(亮色加深降饱和;暗色值锁定 D-12 不得动), ' +
-      '并同步 tokens.css + tokens.ts(色值单点在 tokens.ts)后重跑',
-  ).toBeGreaterThanOrEqual(4.5)
+    'D-20 红线。调色仅允许在 D-07 策略内(亮色加深降饱和;暗色值锁定 D-12 不得动),' +
+    '并同步 tokens.css + tokens.ts(色值单点在 tokens.ts)后重跑'
+  )
 }
 
 // ── 算法锚点 ────────────────────────────────────────────────────────────
@@ -86,7 +84,8 @@ describe('暗色主题色对 ≥4.5:1(值锁定,D-12)', () => {
     ['success/surface', dark.success, dark.surface],
     ['warning/surface', dark.warning, dark.surface],
   ] as const)('%s', (_label, fg, bg) => {
-    expectContrastAtLeast(fg, bg)
+    const ratio = contrastRatio(fg, bg)
+    expect(ratio, contrastFailHint(fg, bg, ratio)).toBeGreaterThanOrEqual(4.5)
   })
 })
 
@@ -107,7 +106,8 @@ describe('亮色主题色对 ≥4.5:1(D-07 浅冷灰底 + 深霓虹体系)', () 
     ['success/surface', light.success, light.surface],
     ['warning/surface', light.warning, light.surface],
   ] as const)('%s', (_label, fg, bg) => {
-    expectContrastAtLeast(fg, bg)
+    const ratio = contrastRatio(fg, bg)
+    expect(ratio, contrastFailHint(fg, bg, ratio)).toBeGreaterThanOrEqual(4.5)
   })
 })
 
