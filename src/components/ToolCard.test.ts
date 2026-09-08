@@ -1,4 +1,4 @@
-// src/components/ToolCard.test.ts — 工具卡片组件测试(D-06 icon 组件引用形态)
+// src/components/ToolCard.test.ts — 工具卡片组件测试(D-06 icon 组件引用形态;D-15 根容器经六件套 Card as=RouterLink 渲染)
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
@@ -44,7 +44,7 @@ describe('ToolCard', () => {
     expect(wrapper.text()).toContain('JSON 校验、格式化与压缩')
   })
 
-  it('卡片根节点为指向 tool.path 的链接', () => {
+  it('Card as=RouterLink 渲染为指向 tool.path 的 a 元素', () => {
     const wrapper = mountToolCard(makeTool())
     const link = wrapper.find('a')
     expect(link.exists()).toBe(true)

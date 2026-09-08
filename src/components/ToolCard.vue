@@ -1,8 +1,11 @@
-<!-- 工具卡片:消费 Tool 元数据（icon/name/description/isNew 派生值,不在组件重算日期窗口） -->
+<!-- 工具卡片:消费 Tool 元数据（icon/name/description/isNew 派生值,不在组件重算日期窗口）
+     D-15 存量迁移:根容器由手写卡片样式(rounded-lg/border/bg-surface/p-5)换用六件套 Card
+     as="RouterLink" + :to 经 attrs 透传渲染链接;hover accent 保留(UI-SPEC Accent reserved「工具卡 hover 边框」) -->
 <template>
-  <RouterLink
+  <Card
+    as="RouterLink"
     :to="tool.path"
-    class="group flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-colors hover:border-[var(--color-neon-cyan)] hover:bg-[var(--color-surface-raised)]"
+    class="group flex flex-col gap-2 transition-colors hover:border-[var(--color-neon-cyan)] hover:bg-[var(--color-surface-raised)]"
   >
     <div class="flex items-center justify-between">
       <span class="text-[var(--color-neon-cyan)]">
@@ -18,11 +21,13 @@
 
     <h3 class="text-base font-semibold text-[var(--color-text-primary)]">{{ tool.name }}</h3>
     <p class="text-sm text-[var(--color-text-muted)]">{{ tool.description }}</p>
-  </RouterLink>
+  </Card>
 </template>
 
 <script setup lang="ts">
 import type { Tool } from '../tools'
+// D-18:按需显式 import,无 barrel
+import Card from '../ui/Card.vue'
 
 defineProps<{
   tool: Tool
