@@ -147,6 +147,21 @@ describe('CopyableText（Clipboard API 可用路径）', () => {
     expect(feedback.classes()).toContain('sr-only')
   })
 
+  it('消费层守卫（02-REVIEW WR-03）：按钮与反馈文本消费 accent 而非霓虹原语（亮色下原语文本不达标）', async () => {
+    const wrapper = mountCopyable({ text: 'hello' })
+    await flushCopy()
+    const button = wrapper.find('button')
+    // 常态 hover 文本 + 成功态文本均经 accent 消费
+    expect(button.classes()).toContain('hover:text-[var(--color-accent)]')
+    await button.trigger('click')
+    await flushCopy()
+    expect(button.classes()).toContain('text-[var(--color-accent)]')
+    expect(button.classes()).not.toContain('text-[var(--color-neon-cyan)]')
+    const feedback = wrapper.find('span[aria-live="polite"]')
+    expect(feedback.classes()).toContain('text-[var(--color-accent)]')
+    expect(feedback.classes()).not.toContain('text-[var(--color-neon-cyan)]')
+  })
+
   it('展示区纯插值转义：含 <script>/事件属性的文本不产生对应节点（V5/T-02-06）', () => {
     const wrapper = mountCopyable({ text: '<script>alert(1)</script><img src=x onerror=alert(1)>' })
     expect(wrapper.find('script').exists()).toBe(false)

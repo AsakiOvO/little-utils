@@ -65,4 +65,21 @@ describe('ToolCard', () => {
     const wrapper = mountToolCard(makeTool({ isNew: false }))
     expect(wrapper.text()).not.toContain('NEW')
   })
+
+  it('消费层守卫(02-REVIEW WR-03):图标与 NEW 徽章文本消费 accent 语义而非霓虹原语(亮色下原语文本 1.37-2.71:1 不达标)', () => {
+    const wrapper = mountToolCard(makeTool({ isNew: true }))
+    const spans = wrapper.find('a').findAll('span')
+    // 图标青字经 accent 消费(类含 text-[var(--color-accent)])
+    const iconSpan = spans.find((s) => s.classes().includes('text-[var(--color-accent)]'))
+    expect(iconSpan).toBeDefined()
+    // NEW 徽章文本与描边一体经 accent-magenta 消费
+    const badge = spans.find((s) => s.text() === 'NEW')
+    expect(badge?.classes()).toContain('text-[var(--color-accent-magenta)]')
+    expect(badge?.classes()).toContain('border-[var(--color-accent-magenta)]')
+    // 负向:组件任何 span 均不得以原语作文本色(02-REVIEW CR-01 回归防线)
+    for (const span of spans) {
+      expect(span.classes()).not.toContain('text-[var(--color-neon-cyan)]')
+      expect(span.classes()).not.toContain('text-[var(--color-neon-magenta)]')
+    }
+  })
 })

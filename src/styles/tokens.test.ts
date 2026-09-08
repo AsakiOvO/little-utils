@@ -111,6 +111,34 @@ describe('亮色主题色对 ≥4.5:1(D-07 浅冷灰底 + 深霓虹体系)', () 
   })
 })
 
+// ── accent 语义角色色对(消费层守卫,02-REVIEW WR-03)──────────────────────
+// accent = 组件层文本/选中/反馈的霓虹语义色:亮色解析为 D-07 深霓虹 *-deep,暗色为原语
+// (tokens.css :root/.dark 分流,声明同步断言见下方 tokens.css↔tokens.ts 组)。
+// 本组显式覆盖 accent 实际指向值 × 亮暗背景的对比度,堵住「组件消费层」验收面盲区。
+
+describe('accent 语义角色色对 ≥4.5:1(亮=deep / 暗=原语,02-REVIEW WR-03)', () => {
+  const light = tokens.light
+  const dark = tokens.dark
+
+  it.each([
+    ['亮 accent(cyan-deep)/bg', light['neon-cyan-deep'], light.bg],
+    ['亮 accent(cyan-deep)/surface', light['neon-cyan-deep'], light.surface],
+    ['亮 accent-magenta(magenta-deep)/bg', light['neon-magenta-deep'], light.bg],
+    ['亮 accent-magenta(magenta-deep)/surface', light['neon-magenta-deep'], light.surface],
+    ['亮 accent-yellow(yellow-deep)/bg', light['neon-yellow-deep'], light.bg],
+    ['亮 accent-yellow(yellow-deep)/surface', light['neon-yellow-deep'], light.surface],
+    ['暗 accent(cyan 原语)/bg', tokens.neon.cyan, dark.bg],
+    ['暗 accent(cyan 原语)/surface', tokens.neon.cyan, dark.surface],
+    ['暗 accent-magenta(magenta 原语)/bg', tokens.neon.magenta, dark.bg],
+    ['暗 accent-magenta(magenta 原语)/surface', tokens.neon.magenta, dark.surface],
+    ['暗 accent-yellow(yellow 原语)/bg', tokens.neon.yellow, dark.bg],
+    ['暗 accent-yellow(yellow 原语)/surface', tokens.neon.yellow, dark.surface],
+  ] as const)('%s', (_label, fg, bg) => {
+    const ratio = contrastRatio(fg, bg)
+    expect(ratio, contrastFailHint(fg, bg, ratio)).toBeGreaterThanOrEqual(4.5)
+  })
+})
+
 // ── tokens.css ↔ tokens.ts 同步(单点双源,改色即红)───────────────────
 
 describe('tokens.css ↔ tokens.ts 同步断言(D-20)', () => {
