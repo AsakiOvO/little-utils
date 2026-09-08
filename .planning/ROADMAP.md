@@ -71,12 +71,12 @@ Plans:
   4. 霓虹青/品红/电光黄以 oklch 设计令牌贯穿全站,主题文字对比度 ≥ 4.5:1(可测量验证)
   5. 输入框/卡片/按钮/Tabs/可复制文本域等基础组件就位,工具操作区无装饰干扰、克制易读
 
-**Plans**: 7 plans
+**Plans**: 1/7 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 02-01-PLAN.md — 三层令牌重构(tokens.css 亮暗双套 + tokens.ts 单点 + 对比度/同步双保险)+ base.css 全局基线(16px/reduced-motion/focus-visible/瞬切)(Wave 1)
+- [x] 02-01-PLAN.md — 三层令牌重构(tokens.css 亮暗双套 + tokens.ts 单点 + 对比度/同步双保险)+ base.css 全局基线(16px/reduced-motion/focus-visible/瞬切)(Wave 1)
 - [ ] 02-02-PLAN.md — useThemeMode 三态状态机 + ThemeToggle 双 layout 挂载 + FOUC 内联脚本与预渲染默认暗色(Wave 1,与 02-01 并行)
 
 **Wave 2** *(blocked on Wave 1 completion)*
@@ -201,7 +201,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. 应用骨架与工具注册表契约 | 5/5 | Complete    | 2026-09-07 |
-| 2. 设计系统与响应式/可访问性基线 | 0/TBD | Not started | - |
+| 2. 设计系统与响应式/可访问性基线 | 1/7 | In Progress|  |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
 | 5. 开发辅助工具批量补齐 | 0/TBD | Not started | - |
