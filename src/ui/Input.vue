@@ -11,8 +11,8 @@
   <label v-if="label" :for="id" class="text-sm text-[var(--color-text-muted)]">{{ label }}</label>
   <textarea
     v-if="multiline"
-    :id="id"
     v-bind="$attrs"
+    :id="id"
     rows="4"
     class="min-h-11 w-full rounded-md border bg-[var(--color-surface)] px-3 py-2.5 text-base text-[var(--color-text-primary)] transition-colors placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-focus)]"
     :class="controlBorderClasses"
@@ -23,8 +23,8 @@
   />
   <input
     v-else
-    :id="id"
     v-bind="$attrs"
+    :id="id"
     class="min-h-11 w-full rounded-md border bg-[var(--color-surface)] px-3 py-2.5 text-base text-[var(--color-text-primary)] transition-colors placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-focus)]"
     :class="controlBorderClasses"
     :value="modelValue"

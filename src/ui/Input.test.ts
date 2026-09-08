@@ -20,6 +20,21 @@ describe('Input', () => {
     expect(label.attributes('for')).toBe(control.attributes('id'))
   })
 
+  it('attrs 透传 id 不打断 label 关联:控件 id/value/aria 由组件持有,置于 $attrs 之后(02-REVIEW WR-01 契约)', () => {
+    // 消费方误传 id 属性时,mergeProps 后者胜 —— 组件 id 必须最终胜出,否则 for/id 静默断裂
+    const single = mountInput({ label: '关键词' }, { id: 'consumer-id' })
+    const label = single.find('label')
+    const control = single.find('input')
+    expect(control.attributes('id')).not.toBe('consumer-id')
+    expect(label.attributes('for')).toBe(control.attributes('id'))
+
+    const area = mountInput({ label: '描述', multiline: true }, { id: 'consumer-id' })
+    const areaLabel = area.find('label')
+    const areaControl = area.find('textarea')
+    expect(areaControl.attributes('id')).not.toBe('consumer-id')
+    expect(areaLabel.attributes('for')).toBe(areaControl.attributes('id'))
+  })
+
   it('v-model:setValue 触发后 emitted("update:modelValue") 携带新值', async () => {
     const wrapper = mountInput()
     await wrapper.find('input').setValue('{ "a": 1 }')
