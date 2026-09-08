@@ -14,7 +14,8 @@
           </span>
         </RouterLink>
         <div class="flex items-center gap-4">
-          <nav class="text-sm text-[var(--color-text-muted)]">开发者 &amp; 办公工具箱</nav>
+          <!-- 站点副标题非导航区块(无链接):用 span 避免 nav 空地标误播报(02-REVIEW WR-02) -->
+          <span class="text-sm text-[var(--color-text-muted)]">开发者 &amp; 办公工具箱</span>
           <!-- ThemeToggle:三态主题切换控件(D-02/D-03),顶栏右上角;Phase 4/6 只填不改 -->
           <ThemeToggle />
         </div>
