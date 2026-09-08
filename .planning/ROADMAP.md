@@ -74,13 +74,25 @@ Plans:
 **Plans**: 7 plans
 
 Plans:
+**Wave 1**
+
 - [ ] 02-01-PLAN.md — 三层令牌重构(tokens.css 亮暗双套 + tokens.ts 单点 + 对比度/同步双保险)+ base.css 全局基线(16px/reduced-motion/focus-visible/瞬切)(Wave 1)
 - [ ] 02-02-PLAN.md — useThemeMode 三态状态机 + ThemeToggle 双 layout 挂载 + FOUC 内联脚本与预渲染默认暗色(Wave 1,与 02-01 并行)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 02-03-PLAN.md — 六件套 A:Button/Input/Card(44px/16px 默认层 + 错误态 aria)(Wave 2)
 - [ ] 02-04-PLAN.md — 六件套 B:CopyableText(useCopy 封装)/Tabs(WAI-ARIA 键盘导航)(Wave 2)
 - [ ] 02-05-PLAN.md — CodeMirror 双主题(cm-theme + Compartment)+ oneDark 移除(Wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 02-06-PLAN.md — 存量迁移 I:ToolCard/home/not-found/双 layout + Typography/Spacing 归一(Wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
 - [ ] 02-07-PLAN.md — 存量迁移 II:json-formatter + 阶段终局门禁 + D-23 手动验收 human-check(Wave 4)
+
 **UI hint**: yes
 
 ### Phase 3: 预渲染 SEO 与部署管线
