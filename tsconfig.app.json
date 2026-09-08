@@ -1,7 +1,9 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
-  "exclude": ["src/**/__tests__/*"],
+  // *.test.ts 就近布局(Phase 1)由 tsconfig.vitest.json(type-check 含 node types)统一检查;
+  // 从 app 项目排除,避免 node:fs 等依赖在无 node types 的 app 项目产生幽灵类型错误。
+  "exclude": ["src/**/__tests__/*", "src/**/*.test.ts"],
   "compilerOptions": {
     // Extra safety for array and object lookups, but may have false positives.
     "noUncheckedIndexedAccess": true,

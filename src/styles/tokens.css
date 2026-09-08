@@ -1,17 +1,57 @@
-/* Source: tailwindcss.com/docs/colors /docs/theme /docs/dark-mode（Context7 官方文档） */
-/* src/styles/tokens.css */
+/* Source: tailwindcss.com/docs/colors /docs/theme /docs/dark-mode(Context7 官方文档) */
+/* src/styles/tokens.css — D-09 三层设计令牌:
+   ① @theme 原语层 + 语义层·亮色(:root 默认) → ② .dark 语义层·暗色(D-12 机制性搬迁) → ③ 组件层(--color-focus) */
 @import "tailwindcss";
 
-/* Phase 2 启用类切换暗色；Phase 1 先声明不启用（D-05：Phase 2 只补切换不重做令牌） */
+/* Phase 2 启用类切换暗色;Phase 1 先声明不启用(D-05:Phase 2 只补切换不重做令牌) */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* —— 霓虹原色（oklch，D-04）—— */
+  /* ── ① 原语层(不直接用于页面,D-09;Phase 1 D-04/D-12 值一字不动)── */
   --color-neon-cyan: oklch(0.85 0.16 195);
   --color-neon-magenta: oklch(0.72 0.24 330);
   --color-neon-yellow: oklch(0.92 0.19 105);
 
-  /* —— 暗色语义底（Phase 1 默认主题）—— */
+  /* ── ② 语义层 · 亮色(:root 默认;D-07 浅冷灰底起点值,文字用途受 D-20 ≥4.5:1 单测裁决)── */
+  --color-bg: oklch(0.97 0.008 260);
+  --color-surface: oklch(0.99 0.004 260);
+  --color-surface-raised: oklch(0.94 0.01 260);
+  --color-text-primary: oklch(0.24 0.02 260);
+  --color-text-muted: oklch(0.46 0.02 260);
+  --color-border: oklch(0.88 0.01 260);
+
+  /* ── D-10 功能色 · 亮色(文字用途,D-20 单测裁决)── */
+  --color-danger: oklch(0.50 0.19 25);
+  --color-success: oklch(0.45 0.12 150);
+  --color-warning: oklch(0.42 0.11 85);
+
+  /* ── D-10 功能色背景/边框变体(非文字用途,不受 4.5:1 约束:背景 = 同色相极浅低饱和,边框 = 中强度)── */
+  --color-danger-bg: oklch(0.96 0.015 25);
+  --color-danger-border: oklch(0.75 0.10 25);
+  --color-success-bg: oklch(0.96 0.025 150);
+  --color-success-border: oklch(0.72 0.08 150);
+  --color-warning-bg: oklch(0.96 0.035 85);
+  --color-warning-border: oklch(0.72 0.09 85);
+
+  /* ── 字体(Phase 1 原值逐字保留)── */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* ── glow · 亮色(D-08:透明度约减半 + 深霓虹血统;大面积装饰滥用留给 Phase 6 装饰层)── */
+  --shadow-glow-cyan: 0 0 12px oklch(0.42 0.10 230 / 0.18);
+  --shadow-glow-magenta: 0 0 12px oklch(0.40 0.16 330 / 0.16);
+}
+
+/* ── color-scheme CSS 兜底(plan 02-02 的 JS 双写与 FOUC 脚本是动态接管方)── */
+/* 源顺序纪律::root 与 .dark 特异性同为 (0,1,0),靠源顺序覆盖 —— 亮色兜底必须先声明,
+   .dark 的暗色声明在其后胜出(02-RESEARCH §Pattern 1 骨架);若把本块放到文件末尾,
+   暗色模式的 CSS 兜底会被 :root 声明反向覆盖 */
+:root {
+  color-scheme: light;
+}
+
+/* ── ② 语义层 · 暗色(D-12:Phase 1 值一字不动,机制性搬迁自 @theme)── */
+/* 必须置于 @theme 与 :root 亮色兜底之后 —— 同特异性靠源顺序覆盖(02-RESEARCH Pitfall 2) */
+.dark {
   --color-bg: oklch(0.16 0.02 260);
   --color-surface: oklch(0.2 0.025 260);
   --color-surface-raised: oklch(0.24 0.03 260);
@@ -19,10 +59,29 @@
   --color-text-muted: oklch(0.65 0.02 260);
   --color-border: oklch(0.3 0.03 260);
 
-  /* —— 字体 —— */
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* D-10 功能色 · 暗色(UI-SPEC 起点) */
+  --color-danger: oklch(0.65 0.19 25);
+  --color-success: oklch(0.75 0.15 150);
+  --color-warning: oklch(0.80 0.15 85);
 
-  /* —— 发光阴影（静态；动画只碰 opacity/transform）—— */
+  /* D-10 功能色背景/边框变体 · 暗色(非文字用途,不受 4.5:1 约束) */
+  --color-danger-bg: oklch(0.28 0.05 25);
+  --color-danger-border: oklch(0.45 0.12 25);
+  --color-success-bg: oklch(0.26 0.04 150);
+  --color-success-border: oklch(0.45 0.09 150);
+  --color-warning-bg: oklch(0.28 0.05 85);
+  --color-warning-border: oklch(0.48 0.10 85);
+
+  /* glow · 暗色(Phase 1 原值逐字保留,值锁定) */
   --shadow-glow-cyan: 0 0 12px oklch(0.85 0.16 195 / 0.35);
   --shadow-glow-magenta: 0 0 12px oklch(0.72 0.24 330 / 0.3);
+
+  color-scheme: dark;
+}
+
+/* ── ③ 组件层(D-09:仅组件需要时建)── */
+/* --color-focus:焦点环语义角色(D-19),亮暗同值,经语义组件层消费;
+   base.css 与六件套焦点环一律用 var(--color-focus),页面/组件不直连原语(威胁 T-02-02) */
+:root {
+  --color-focus: var(--color-neon-cyan);
 }
