@@ -17,46 +17,25 @@
       <!-- ── 左栏：CodeMirror 输入区（D-01，随本工具 chunk 懒加载） ── -->
       <section class="flex min-w-0 flex-1 flex-col gap-3 xl:h-[560px]" aria-label="JSON 输入">
         <div class="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            class="rounded-md border px-3 py-1.5 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-            :class="
-              hasResult
-                ? 'border-[var(--color-border)] text-[var(--color-text-primary)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
-                : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
-            "
-            :disabled="!hasResult"
-            @click="applyFormatted"
-          >
-            格式化
-          </button>
-          <button
-            type="button"
-            class="rounded-md border px-3 py-1.5 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-            :class="
-              hasResult
-                ? 'border-[var(--color-border)] text-[var(--color-text-primary)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
-                : 'border-[var(--color-border)] text-[var(--color-text-muted)]'
-            "
-            :disabled="!hasResult"
-            @click="applyMinified"
-          >
-            压缩
-          </button>
+          <!-- D-15 迁移：格式化/压缩按钮换用六件套 Button（outline，hover accent/disabled 语义组件内建，
+               py-1.5 存量随迁归一为 min-h-11 44px 触控，D-21/02-06 deferred-items 既定迁移面） -->
+          <Button variant="outline" :disabled="!hasResult" @click="applyFormatted">格式化</Button>
+          <Button variant="outline" :disabled="!hasResult" @click="applyMinified">压缩</Button>
         </div>
         <CodeMirrorJson v-model="input" />
       </section>
 
       <!-- ── 右栏：输出视图（同一份 parsed 解析结果） ── -->
       <section class="flex min-w-0 flex-1 flex-col gap-4 xl:h-[560px] xl:overflow-y-auto" aria-label="格式化输出">
-        <!-- 结构化错误卡：line/column/message（透明性禁令：报错而非静默修正） -->
+        <!-- 结构化错误卡：line/column/message（透明性禁令：报错而非静默修正）
+             D-15/D-10 迁移：错误态消费 danger 语义色（UI-SPEC Destructive 行——校验失败属 Destructive 语义，不直连霓虹品红原语） -->
         <div
           v-if="parsed && !parsed.ok"
           role="alert"
-          class="flex flex-col gap-1 rounded-lg border border-[var(--color-neon-magenta)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-primary)]"
+          class="flex flex-col gap-1 rounded-lg border border-[var(--color-danger)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-primary)]"
         >
           <p>{{ parsed.error.message }}</p>
-          <p class="font-mono text-[var(--color-neon-magenta)]">
+          <p class="font-mono text-[var(--color-danger)]">
             第 {{ parsed.error.line }} 行 · 第 {{ parsed.error.column }} 列
           </p>
         </div>
@@ -71,48 +50,25 @@
 
         <!-- 结果：格式化文本块 + 树形视图，数据源同为 parsed（一次 service 调用） -->
         <template v-else>
-          <div class="flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-sm text-[var(--color-text-muted)]">格式化文本</span>
-              <button
-                type="button"
-                class="rounded-md border px-2 py-1 text-xs transition-colors"
-                :class="
-                  isCopied('formatted')
-                    ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
-                "
-                aria-label="复制格式化文本"
-                @click="copyValue('formatted', parsed.formatted)"
-              >
-                {{ isCopied('formatted') ? '已复制' : '复制' }}
-              </button>
-            </div>
-            <!-- 插值直出：含 <script>/事件属性的字符串值只会是纯文本（T-01-01） -->
-            <pre class="max-h-72 overflow-auto whitespace-pre font-mono text-xs leading-5 text-[var(--color-text-primary)]">{{ parsed.formatted }}</pre>
-          </div>
+          <!-- D-15 迁移：卡容器换用 Card(:padding=false + p-3 定制,02-06 deferred 授权形态)；
+               复制按钮 + 展示区合并为 CopyableText（D-17 逻辑收进组件,D-21 按钮 44px,成功反馈内置） -->
+          <Card :padding="false" class="flex flex-col gap-2 p-3">
+            <span class="text-sm text-[var(--color-text-muted)]">格式化文本</span>
+            <!-- 插值直出（T-01-01/T-02-11）：CopyableText 展示区同为 {{ }} 插值（禁 v-html），
+                 含 <script>/事件属性的字符串值只会是纯文本 -->
+            <CopyableText :text="parsed.formatted" label="复制格式化文本" />
+          </Card>
 
-          <div class="flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3">
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-sm text-[var(--color-text-muted)]">树形视图</span>
-              <button
-                type="button"
-                class="rounded-md border px-2 py-1 text-xs transition-colors"
-                :class="
-                  isCopied('minified')
-                    ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
-                    : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
-                "
-                aria-label="复制压缩结果"
-                @click="copyValue('minified', parsed.minified)"
-              >
-                {{ isCopied('minified') ? '已复制' : '复制压缩' }}
-              </button>
-            </div>
-            <div class="overflow-x-auto text-sm">
-              <JsonTree :node="parsed.tree" :depth="0" />
-            </div>
-          </div>
+          <!-- D-15 迁移：树形卡同格式化卡形态；展示区=树（默认插槽），复制 payload=minified 全文
+               ——复制能力与展示解耦但同源（同一份 parsed 解析结果驱动） -->
+          <Card :padding="false" class="flex flex-col gap-2 p-3">
+            <span class="text-sm text-[var(--color-text-muted)]">树形视图</span>
+            <CopyableText :text="parsed.minified" label="复制压缩结果">
+              <div class="overflow-x-auto text-sm">
+                <JsonTree :node="parsed.tree" :depth="0" />
+              </div>
+            </CopyableText>
+          </Card>
         </template>
       </section>
     </div>
@@ -121,7 +77,9 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useCopy } from '../../composables/useCopy'
+import Button from '../../ui/Button.vue'
+import CopyableText from '../../ui/CopyableText.vue'
+import Card from '../../ui/Card.vue'
 import CodeMirrorJson from './components/CodeMirrorJson.vue'
 import JsonTree from './components/JsonTree.vue'
 import {
@@ -166,18 +124,5 @@ function applyFormatted(): void {
 function applyMinified(): void {
   const r = parsed.value
   if (r?.ok) input.value = r.minified
-}
-
-// 复制（01-02 useCopy 共享 composable + lastCopiedKey 多按钮独立反馈）
-const { copy, copied } = useCopy()
-const lastCopiedKey = ref<string | null>(null)
-
-async function copyValue(key: string, value: string): Promise<void> {
-  await copy(value)
-  lastCopiedKey.value = key
-}
-
-function isCopied(key: string): boolean {
-  return copied.value && lastCopiedKey.value === key
 }
 </script>
