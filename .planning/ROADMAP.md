@@ -71,7 +71,7 @@ Plans:
   4. 霓虹青/品红/电光黄以 oklch 设计令牌贯穿全站,主题文字对比度 ≥ 4.5:1(可测量验证)
   5. 输入框/卡片/按钮/Tabs/可复制文本域等基础组件就位,工具操作区无装饰干扰、克制易读
 
-**Plans**: 6/7 plans executed
+**Plans**: 7/7 plans executed
 
 Plans:
 **Wave 1**
@@ -91,7 +91,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 02-07-PLAN.md — 存量迁移 II:json-formatter + 阶段终局门禁 + D-23 手动验收 human-check(Wave 4)
+- [x] 02-07-PLAN.md — 存量迁移 II:json-formatter + 阶段终局门禁 + D-23 手动验收 human-check(Wave 4)
 
 **UI hint**: yes
 
@@ -201,7 +201,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. 应用骨架与工具注册表契约 | 5/5 | Complete    | 2026-09-07 |
-| 2. 设计系统与响应式/可访问性基线 | 6/7 | In Progress|  |
+| 2. 设计系统与响应式/可访问性基线 | 7/7 | In Progress|  |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
 | 5. 开发辅助工具批量补齐 | 0/TBD | Not started | - |
