@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 current_phase: 02
 current_phase_name: 设计系统与响应式/可访问性基线
 status: executing
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-09-08T08:12:43.584Z"
+stopped_at: Completed 02-05-PLAN.md
+last_updated: "2026-09-08T08:35:04.675Z"
 last_activity: 2026-09-08
 last_activity_desc: Phase 02 execution started
-state_head: 2a11914a515032535a92727613844a97ef084853
+state_head: 3e48520d97a13dca8a107b1a9411986f2bfdff2a
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 12
-  completed_plans: 8
+  completed_plans: 9
   percent: 13
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 ## Current Position
 
 Phase: 02 (设计系统与响应式/可访问性基线) — EXECUTING
-Plan: 5 of 7
+Plan: 6 of 7
 Status: Ready to execute
 Last activity: 2026-09-08 — Phase 02 execution started
 
@@ -67,6 +67,7 @@ Progress: [█░░░░░░░░░] 13%
 | Phase 02 P02 | 23min | 3 tasks | 8 files |
 | Phase 02 P03 | 20min | 3 tasks | 8 files |
 | Phase 02 P04 | 30 min | 2 tasks | 4 files |
+| Phase 02 P05 | 15 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-04: VueUse 14.4.0 useClipboard(legacy:true) 的 copy() 内部吞掉 write 失败转 execCommand 降级,唯一真实 reject 路径 = 降级 execCommand 抛错 —— CopyableText failed 态按此语义落地,失败测试构造真实拒绝路径而非 mock composable(护住 D-17 封装断言)
 - [Phase 02]: 02-04: @vue/test-utils 默认挂载游离 DOM 树(isConnected=false),happy-dom focus() 对未连接元素提前返回 —— 键盘导航聚焦断言改 attachTo: document.body 挂载并用例内 unmount 清理(探针实证,Pitfall 5 同类环境怪癖)
 - [Phase 02]: 02-04: Tabs 采用受控 v-model 契约(activeId = modelValue ?? 首个 tab,与 Input/CodeMirrorJson 同构),aria-selected/tabIndex/hidden 三件套由 selectTab 单点驱动防状态漂移
+- [Phase 02]: 02-05: CM 子包(@codemirror/state 6.7.2/@codemirror/language 6.12.4/@lezer/highlight 1.2.3)以 lockfile 精确版本提升为直接依赖 —— pnpm 隔离布局下传递依赖从项目根不可解析,计划/RESEARCH Pattern 4 骨架的 import 不可达(Rule 3);零新装零新下载,T-02-SC 纪律保持,EditorView 沿用 codemirror 元包重导出
+- [Phase 02]: 02-05: createCmTheme(dark) 将 chrome+语法高亮打包为单一扩展数组进一个 Compartment —— watch(resolved) reconfigure 整体换主题不重建视图,输入/光标状态无损(D-06);色值全部取 tokens.ts 字面 oklch 与 D-20 单测同源
 
 ### Pending Todos
 
@@ -116,6 +119,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-09-08T08:12:43.525Z
-Stopped at: Completed 02-04-PLAN.md
+Last session: 2026-09-08T08:34:51.086Z
+Stopped at: Completed 02-05-PLAN.md
 Resume file: None

@@ -45,7 +45,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### 赛博朋克风格（Cyberpunk Style）
 
-- [ ] **STYL-01**: 设计系统先行：Tailwind 4 `@theme` 定义霓虹青/品红/电光黄（oklch）设计令牌，霓虹文字对比度 ≥ 4.5:1
+- [x] **STYL-01**: 设计系统先行：Tailwind 4 `@theme` 定义霓虹青/品红/电光黄（oklch）设计令牌，霓虹文字对比度 ≥ 4.5:1
 - [ ] **STYL-02**: 首页与导航强风格化（glow/glitch/HUD，纯 CSS 动画，只动 opacity/transform）
 - [x] **STYL-03**: 动效提供 `prefers-reduced-motion` 降级，工具操作区保持克制易读
 - [ ] **STYL-04**: 亮暗双主题下赛博朋克氛围一致，装饰效果限定在装饰层（不污染工具区可读性）
@@ -101,7 +101,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCH-04 | Phase 1 | Complete |
 | TOOL-01 | Phase 1 | Complete |
 | TOOL-02 | Phase 1 | Complete |
-| STYL-01 | Phase 2 | Pending |
+| STYL-01 | Phase 2 | Complete |
 | STYL-03 | Phase 2 | Complete |
 | SITE-04 | Phase 2 | Complete |
 | SITE-05 | Phase 2 | Complete |
