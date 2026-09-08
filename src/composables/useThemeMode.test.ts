@@ -135,6 +135,39 @@ describe('useThemeMode 三态状态机', () => {
     expect(preference.value).toBe('auto') // 非 'dark'/'light' 一律 auto
   })
 
+  it('⑦ 单例 DOM 副作用跨组件生命周期存活:首次调用组件卸载后 watch 不停(D-23 导航后主题失效回归)', async () => {
+    // 真实缺陷场景(2026-09-08 D-23 人工验收):首页 layout 的 ThemeToggle 首次调用
+    // useThemeMode() 创建单例,watch 被绑定到该组件 scope;导航切换 layout 后组件卸载,
+    // Vue 自动停止 watch → DOM 副作用(html.dark/colorScheme)停摆,页面外观不再联动。
+    const { mount } = await import('@vue/test-utils')
+    const { defineComponent } = await import('vue')
+    const mod = await import('./useThemeMode')
+
+    // 组件 A:模拟首页 layout 顶栏 ThemeToggle——单例与 watch 于其 setup scope 首次创建
+    const HostA = defineComponent({
+      setup() {
+        mod.useThemeMode()
+        return () => null
+      },
+    })
+    const wrapperA = mount(HostA)
+    wrapperA.unmount() // 模拟导航:首页 layout 卸载(修复前 watch 在此被自动停止)
+
+    // 卸载后再消费同一单例(模拟工具页 ThemeToggle 触发 cycle)
+    const { cycle, resolved } = mod.useThemeMode()
+    cycle() // auto → dark
+    await nextTick()
+    expect(resolved.value).toBe('dark')
+    // 修复前:watch 已随组件 A 卸载停止,classList 不切换 → 本断言红
+    expect(document.documentElement.classList.contains('dark')).toBe(true)
+    expect(document.documentElement.style.colorScheme).toBe('dark')
+
+    cycle() // dark → light:连续切换同样必须联动
+    await nextTick()
+    expect(document.documentElement.classList.contains('dark')).toBe(false)
+    expect(document.documentElement.style.colorScheme).toBe('light')
+  })
+
   it('⑥ resolved 变更驱动 DOM:html.dark + colorScheme 翻转,瞬切窗口挂 .theme-switching、双 rAF 后移除(D-11)', async () => {
     vi.useFakeTimers() // fake requestAnimationFrame,控制双 rAF 移除时机
     try {

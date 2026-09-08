@@ -8,7 +8,7 @@
 // 瞬切副作用(D-11/Pitfall 3):.theme-switching 类与 src/styles/base.css 中和规则配对
 //   (两处注释互指,机制改动需同步,plan 02-01);双 requestAnimationFrame 后移除,
 //   主题切换全程无全局过渡动画(组件级 hover 渐变不受限)。
-import { computed, watch } from 'vue'
+import { computed, effectScope, watch } from 'vue'
 import { usePreferredColorScheme, useStorage } from '@vueuse/core'
 import type { Ref } from 'vue'
 
@@ -29,38 +29,51 @@ function normalize(raw: unknown): ThemePreference {
 let singleton: ReturnType<typeof createThemeMode> | null = null
 
 function createThemeMode() {
-  const preference = useStorage<ThemePreference>(THEME_STORAGE_KEY, 'auto', undefined, {
-    // vite-ssg mounted 纪律(Pitfall 6):预渲染期不读 storage,防水合不匹配
-    initOnMounted: true,
-    serializer: { read: normalize, write: (v: ThemePreference) => v },
-  })
-  const system = usePreferredColorScheme() // ComputedRef<'dark' | 'light' | 'no-preference'>,实时联动(D-04)
+  // detached scope(应用级生命周期):状态机为模块级单例,其响应式副作用(watch/useStorage/
+  // usePreferredColorScheme 的内部监听)不得绑定任何组件 scope——否则 watch 随首个调用方
+  // (如首页 layout 顶栏的 ThemeToggle)卸载而被 Vue 自动停止,导航切换 layout 后 DOM 副作用
+  // 停摆。D-23 人工验收实证(2026-09-08):首页→工具页后主题切换失效——CodeMirror 输入区
+  // 消费 resolved 响应式仍联动,而页面 .dark 类消费的 DOM 副作用已死;useThemeMode.test.ts
+  // ⑦ 回归锁定。detached=true:不随父 scope/组件卸载 stop,单例语义下无泄漏(仅创建一次)。
+  const api = effectScope(true).run(() => {
+    const preference = useStorage<ThemePreference>(THEME_STORAGE_KEY, 'auto', undefined, {
+      // vite-ssg mounted 纪律(Pitfall 6):预渲染期不读 storage,防水合不匹配
+      initOnMounted: true,
+      serializer: { read: normalize, write: (v: ThemePreference) => v },
+    })
+    const system = usePreferredColorScheme() // ComputedRef<'dark' | 'light' | 'no-preference'>,实时联动(D-04)
 
-  const resolved = computed<ResolvedTheme>(() => {
-    if (preference.value !== 'auto') return preference.value
-    return system.value === 'light' ? 'light' : 'dark' // no-preference 显式回落暗(D-01)
-  })
+    const resolved = computed<ResolvedTheme>(() => {
+      if (preference.value !== 'auto') return preference.value
+      return system.value === 'light' ? 'light' : 'dark' // no-preference 显式回落暗(D-01)
+    })
 
-  // DOM 副作用:SSG Node 预渲染无 document,必须守卫(Pitfall 6)
-  watch(resolved, (mode) => {
-    if (typeof document === 'undefined') return
-    const root = document.documentElement
-    root.classList.add('theme-switching') // D-11 瞬切窗口:配对 base.css 中和规则,双 rAF 后移除
-    root.classList.toggle('dark', mode === 'dark')
-    root.style.colorScheme = mode
-    requestAnimationFrame(() => {
+    // DOM 副作用:SSG Node 预渲染无 document,必须守卫(Pitfall 6)
+    watch(resolved, (mode) => {
+      if (typeof document === 'undefined') return
+      const root = document.documentElement
+      root.classList.add('theme-switching') // D-11 瞬切窗口:配对 base.css 中和规则,双 rAF 后移除
+      root.classList.toggle('dark', mode === 'dark')
+      root.style.colorScheme = mode
       requestAnimationFrame(() => {
-        root.classList.remove('theme-switching')
+        requestAnimationFrame(() => {
+          root.classList.remove('theme-switching')
+        })
       })
     })
+
+    /** D-02/D-03 循环:暗 → 亮 → 跟随系统 → 暗 */
+    function cycle(): void {
+      preference.value = preference.value === 'dark' ? 'light' : preference.value === 'light' ? 'auto' : 'dark'
+    }
+
+    return { preference: preference as Ref<ThemePreference>, resolved, cycle }
   })
 
-  /** D-02/D-03 循环:暗 → 亮 → 跟随系统 → 暗 */
-  function cycle(): void {
-    preference.value = preference.value === 'dark' ? 'light' : preference.value === 'light' ? 'auto' : 'dark'
-  }
-
-  return { preference: preference as Ref<ThemePreference>, resolved, cycle }
+  // scope.run 同步执行成功必返回值(undefined 仅当 scope 已停止——detached 新 scope 不可达);
+  // 显式守卫而非非空断言,满足 lint 纪律且让不变量可见。
+  if (!api) throw new Error('useThemeMode: effectScope.run() 同步返回空(不可达)')
+  return api
 }
 
 /** 模块级单例:ThemeToggle / CodeMirrorJson 等多消费点共享同一状态 */
