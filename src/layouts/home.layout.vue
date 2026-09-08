@@ -10,7 +10,11 @@
             little-utils
           </span>
         </RouterLink>
-        <nav class="text-sm text-[var(--color-text-muted)]">开发者 &amp; 办公工具箱</nav>
+        <div class="flex items-center gap-4">
+          <nav class="text-sm text-[var(--color-text-muted)]">开发者 &amp; 办公工具箱</nav>
+          <!-- ThemeToggle:三态主题切换控件(D-02/D-03),顶栏右上角;Phase 4/6 只填不改 -->
+          <ThemeToggle />
+        </div>
       </div>
     </header>
 
@@ -25,3 +29,8 @@
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+// D-18:按需显式 import,无 barrel(D-03 ThemeToggle 挂载点)
+import ThemeToggle from '../ui/ThemeToggle.vue'
+</script>

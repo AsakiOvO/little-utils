@@ -10,7 +10,11 @@
           <span aria-hidden="true">←</span>
           <span>返回首页</span>
         </RouterLink>
-        <span class="font-mono text-sm text-[var(--color-text-muted)]">little-utils</span>
+        <!-- ThemeToggle:三态主题切换控件(D-02/D-03),ml-auto 推到顶栏右上角;返回首页链接不动(归一在 plan 02-06) -->
+        <div class="ml-auto flex items-center gap-3">
+          <span class="font-mono text-sm text-[var(--color-text-muted)]">little-utils</span>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
 
@@ -20,3 +24,8 @@
     </main>
   </div>
 </template>
+
+<script setup lang="ts">
+// D-18:按需显式 import,无 barrel(D-03 ThemeToggle 挂载点)
+import ThemeToggle from '../ui/ThemeToggle.vue'
+</script>
