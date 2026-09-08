@@ -18,6 +18,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+// D-13/D-18 命名契约:组件名与文件名一致(单名无前缀)。项目 SFC-only + 显式 import(D-18),
+// 无 in-DOM 模板歧义,与原生 <button> 大小写分明 —— no-reserved-component-names 误报豁免见 .oxlintrc.json overrides。
 defineOptions({ name: 'Button' })
 
 /** variant 契约(D-14 向后兼容面):outline 描边按钮 / ghost 幽灵按钮 */

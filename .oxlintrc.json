@@ -9,5 +9,13 @@
   },
   "rules": {
     "vitest/valid-expect": ["error", { "maxArgs": 2 }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/ui/Button.vue", "src/ui/Input.vue"],
+      "rules": {
+        "vue/no-reserved-component-names": "off"
+      }
+    }
+  ]
 }

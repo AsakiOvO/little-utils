@@ -31,9 +31,10 @@ export default defineConfigWithVueTs(
   ...pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
 
-  // pages/layouts 目录组件按文件路由/布局惯例允许单词名(如 home.vue / tool.layout.vue)
+  // pages/layouts 目录组件按文件路由/布局惯例允许单词名(如 home.vue / tool.layout.vue);
+  // src/ui 六件套按 D-13/D-18 无前缀单名契约(Button/Input/Card/Tabs 与文件名一致,显式 import 无歧义)
   {
-    files: ['src/pages/**/*.vue', 'src/layouts/**/*.vue'],
+    files: ['src/pages/**/*.vue', 'src/layouts/**/*.vue', 'src/ui/**/*.vue'],
     rules: {
       'vue/multi-word-component-names': 'off',
     },
