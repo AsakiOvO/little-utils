@@ -3,11 +3,11 @@ gsd_state_version: 1.0
 current_phase: 02
 current_phase_name: 设计系统与响应式/可访问性基线
 status: executing
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-09-08T07:36:27.963Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-09-08T08:12:43.584Z"
 last_activity: 2026-09-08
 last_activity_desc: Phase 02 execution started
-state_head: 7093ee7948952b3e545635a53a1cfd759af4bf20
+state_head: 2a11914a515032535a92727613844a97ef084853
 progress:
   total_phases: 8
   completed_phases: 1
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 ## Current Position
 
 Phase: 02 (设计系统与响应式/可访问性基线) — EXECUTING
-Plan: 4 of 7
+Plan: 5 of 7
 Status: Ready to execute
 Last activity: 2026-09-08 — Phase 02 execution started
 
@@ -66,6 +66,7 @@ Progress: [█░░░░░░░░░] 13%
 | Phase 02 P01 | 44 min | 2 tasks | 7 files |
 | Phase 02 P02 | 23min | 3 tasks | 8 files |
 | Phase 02 P03 | 20min | 3 tasks | 8 files |
+| Phase 02 P04 | 30 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,9 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-02: 三态状态机自组(useStorage initOnMounted + usePreferredColorScheme + computed)弃用 useDark/useColorMode;no-preference 显式回落暗(D-01);vite-ssg onBeforePageRender 幂等预渲染默认 dark 类
 - [Phase 02]: 02-03: Input 多根组件 attrs 形态 —— inheritAttrs:false + v-bind=$attrs 置前透传、组件持有绑定(:id/:value/aria-*)置后;type 不写死由浏览器默认 text 兜底,id 契约不可被调用方覆盖
 - [Phase 02]: 02-03: lint 卡口 —— D-13/D-18 单名契约与保留名/单词名规则冲突,行内 eslint-disable 被 oxlint --fix 自动删除(反例),改 .oxlintrc.json overrides 按文件豁免 + eslint src/ui 单词名豁免块(Rule 3)
+- [Phase 02]: 02-04: VueUse 14.4.0 useClipboard(legacy:true) 的 copy() 内部吞掉 write 失败转 execCommand 降级,唯一真实 reject 路径 = 降级 execCommand 抛错 —— CopyableText failed 态按此语义落地,失败测试构造真实拒绝路径而非 mock composable(护住 D-17 封装断言)
+- [Phase 02]: 02-04: @vue/test-utils 默认挂载游离 DOM 树(isConnected=false),happy-dom focus() 对未连接元素提前返回 —— 键盘导航聚焦断言改 attachTo: document.body 挂载并用例内 unmount 清理(探针实证,Pitfall 5 同类环境怪癖)
+- [Phase 02]: 02-04: Tabs 采用受控 v-model 契约(activeId = modelValue ?? 首个 tab,与 Input/CodeMirrorJson 同构),aria-selected/tabIndex/hidden 三件套由 selectTab 单点驱动防状态漂移
 
 ### Pending Todos
 
@@ -112,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-09-08T07:36:06.762Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-09-08T08:12:43.525Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None
