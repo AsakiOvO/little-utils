@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 current_phase: 02
 current_phase_name: 设计系统与响应式/可访问性基线
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-09-08T06:30:46.903Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-09-08T07:06:30.866Z"
 last_activity: 2026-09-08
 last_activity_desc: Phase 02 execution started
-state_head: 82ae6919cf42a6514efe50900bae4081dec83d6b
+state_head: 801c77fa8d57ad1ecb7c33e3fcf09d7638e9a7e4
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 12
-  completed_plans: 6
+  completed_plans: 7
   percent: 13
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 ## Current Position
 
 Phase: 02 (设计系统与响应式/可访问性基线) — EXECUTING
-Plan: 2 of 7
+Plan: 3 of 7
 Status: Ready to execute
 Last activity: 2026-09-08 — Phase 02 execution started
 
@@ -64,6 +64,7 @@ Progress: [█░░░░░░░░░] 13%
 | Phase 01 P04 | 14 min | 3 tasks | 9 files |
 | Phase 01 P05 | 13 min | 3 tasks | 6 files |
 | Phase 02 P01 | 44 min | 2 tasks | 7 files |
+| Phase 02 P02 | 23min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,8 @@ Recent decisions affecting current work:
 - [Phase 02]: [Phase 02]: 02-01: color-scheme 亮色 :root 兜底置于 .dark 块之前 —— :root 与 .dark 同特异性靠源顺序覆盖,计划原定文件末尾会在暗色模式反向覆盖(Rule 1,按 RESEARCH Pattern 1 骨架修正)
 - [Phase 02]: [Phase 02]: 02-01: 测试读盘定型 node:fs + import.meta.dirname —— vitest 下 import.meta.url 非 file 协议、?raw 被 CSS mock 吞空(探针实证);tsconfig.app.json 排除 *.test.ts 由 tsconfig.vitest.json(含 node types)统一检查
 - [Phase 02]: [Phase 02]: 02-01: tokens.ts 补齐 D-10 背景/边框变体六键使同步断言覆盖全部语义变量;oxlint vitest/valid-expect maxArgs=2 保留双参 expect 修复消息
+- [Phase 02]: 02-02: THEME_STORAGE_KEY='little-utils:v1:theme' 全站唯一定义点首落地;index.html 内联脚本与 useThemeMode.resolved 判定逐字镜像(测试文本断言守护漂移,Pitfall 1)
+- [Phase 02]: 02-02: 三态状态机自组(useStorage initOnMounted + usePreferredColorScheme + computed)弃用 useDark/useColorMode;no-preference 显式回落暗(D-01);vite-ssg onBeforePageRender 幂等预渲染默认 dark 类
 
 ### Pending Todos
 
@@ -106,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-09-08T06:30:46.863Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-09-08T07:06:30.818Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
