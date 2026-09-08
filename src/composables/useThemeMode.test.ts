@@ -3,6 +3,8 @@
 //   fake 记录 change 监听并可控触发(VueUse useMediaQuery 的 handler 读取 event.matches)。
 // 模块级单例隔离:vi.resetModules() 重置注册表,用例内动态 import 重建单例;
 //   useStorage(initOnMounted) 在组件外调用时经 tryOnMounted 立即读 storage(14.4.0 实证语义)。
+// 读盘断言用 node:fs + import.meta.dirname(vitest 下 import.meta.url 非 file 协议,02-01 定型模式)。
+import { readFileSync } from 'node:fs'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 
@@ -158,5 +160,19 @@ describe('useThemeMode 三态状态机', () => {
     } finally {
       vi.useRealTimers()
     }
+  })
+})
+
+describe('index.html head 内联脚本与 useThemeMode 判定镜像(D-05/Pitfall 1 防漂移)', () => {
+  // 读盘形态沿用 02-01 定型:node:fs + import.meta.dirname(vitest 下 import.meta.url 非 file 协议)
+  const html = readFileSync(`${import.meta.dirname}/../../index.html`, 'utf8')
+
+  it('内联脚本包含 THEME_STORAGE_KEY 字面值(与状态机键镜像)', () => {
+    expect(html, 'head 内联脚本与 useThemeMode 判定逻辑必须镜像对齐(改此必改彼)').toContain(THEME_KEY)
+  })
+
+  it('内联脚本包含 dark/light 白名单分支与 matchMedia 判定(与 resolved 判定镜像)', () => {
+    expect(html, 'head 内联脚本与 useThemeMode 判定逻辑必须镜像对齐(改此必改彼)').toContain("raw === 'dark' || raw === 'light'")
+    expect(html, 'head 内联脚本与 useThemeMode 判定逻辑必须镜像对齐(改此必改彼)').toContain("(prefers-color-scheme: light)")
   })
 })

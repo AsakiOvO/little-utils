@@ -2,6 +2,28 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
+    <!-- FOUC 阻塞脚本(D-05):与 src/composables/useThemeMode.ts 的 resolved 判定逐字镜像对齐,
+         改此必改彼(useThemeMode.test.ts 文本断言守护漂移,Pitfall 1)。
+         白名单布尔挂类 + CSSOM 属性赋值,无注入面(RESEARCH Security 表);vite-ssg 预渲染原样透传,预渲染期不执行。 -->
+    <script>
+      ;(function () {
+        try {
+          // 与 THEME_STORAGE_KEY 一致(唯一定义点:src/composables/useThemeMode.ts,little-utils:v1:* 键惯例首落地)
+          var raw = localStorage.getItem('little-utils:v1:theme')
+          var mode =
+            raw === 'dark' || raw === 'light'
+              ? raw
+              : window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark' // 无记录/auto:no-preference 回落暗(D-01,镜像 resolved 判定)
+          var root = document.documentElement
+          root.classList.toggle('dark', mode === 'dark') // 白名单布尔挂类,无注入面
+          root.style.colorScheme = mode
+        } catch (e) {
+          /* 隐私模式等 storage 不可用:静默兜底,保持预渲染默认暗色基线(vite.config.ts onBeforePageRender) */
+        }
+      })()
+    </script>
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>little-utils — 开发者 & 办公工具箱</title>
