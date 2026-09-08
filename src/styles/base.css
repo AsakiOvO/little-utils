@@ -1,4 +1,6 @@
-/* src/styles/base.css — reset 与 :root 暗色基线（D-04：页面以暗色底呈现） */
+/* src/styles/base.css — 全局基线:reset、排版、原生控件兜底与可访问性降级规则。
+   主题颜色方案(color-scheme)不再在此硬编码:单源由 tokens.css 的 :root/.dark 声明
+   (CSS 兜底)+ plan 02-02 的 FOUC 脚本与 useThemeMode JS 双写动态接管。 */
 *,
 *::before,
 *::after {
@@ -7,7 +9,6 @@
 }
 
 html {
-  color-scheme: dark;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -57,4 +58,47 @@ select,
 textarea {
   font: inherit;
   color: inherit;
+}
+
+/* D-21 移动端兜底:iOS 按最终渲染 computed font-size 判定,聚焦 <16px 输入控件会强制
+   放大页面(且 maximum-scale=1 已被现代 iOS 忽略)。input/select/textarea 三选择器一体
+   适用(02-RESEARCH Pitfall 4);不扩展 [contenteditable](RESEARCH Open Question 3,
+   按 D-21 原文三选择器执行)。本规则必须置于上方 font: inherit 块之后 —— 同特异性
+   (0,0,1),源顺序取胜,否则 font 简写会反向覆盖 font-size;组件默认层见六件套(plan 02-03)。 */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* D-19 全局焦点兜底:组件外的可交互元素也获得可见焦点环。经组件层 --color-focus 消费
+   (tokens.css 组件层声明,D-09:页面/组件不直连原语),六件套组件内焦点样式对齐同一语义角色。 */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* D-11/Pitfall 3 主题瞬切(CSS 侧):切换瞬间中和一切过渡,避免全局颜色渐变与大面积重绘。
+   JS 侧配对:src/composables/useThemeMode.ts(plan 02-02)在切换 watch 内挂 .theme-switching
+   类、双 rAF 后移除 —— 两处注释互指,机制改动需同步。此规则只服务主题瞬切(类仅存在约两帧),
+   组件级 hover 过渡照常工作。 */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+/* D-22 reduced-motion 全局中和:系统开启「减少动态效果」时,全站动画/过渡时长压至最短、
+   迭代收敛为一次并停用平滑滚动。Phase 6 装饰动画天然被本块覆盖,无需逐动画处理
+   (02-RESEARCH State of the Art;行为正确性由 D-23 手动抽验负责,happy-dom 不算媒体查询)。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
