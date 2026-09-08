@@ -107,7 +107,7 @@ describe('CopyableText（Clipboard API 可用路径）', () => {
   it('复制失败：双层降级仍失败（write 拒绝 + execCommand 抛错）→ 反馈 span 显示「复制失败,请手动复制」', async () => {
     write.mockRejectedValue(new Error('write denied'))
     // VueUse 14.4.0：API 路径失败 → 内部转 legacy execCommand 降级；降级本身抛错 → copy() reject
-    document.execCommand = vi.fn(() => {
+    document.execCommand = vi.fn<() => boolean>(() => {
       throw new Error('execCommand unavailable')
     }) as unknown as typeof document.execCommand
     const wrapper = mountCopyable({ text: 'hello' })
