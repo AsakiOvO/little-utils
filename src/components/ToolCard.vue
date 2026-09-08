@@ -8,12 +8,12 @@
     class="group flex flex-col gap-2 transition-colors hover:border-[var(--color-neon-cyan)] hover:bg-[var(--color-surface-raised)]"
   >
     <div class="flex items-center justify-between">
-      <span class="text-[var(--color-neon-cyan)]">
+      <span class="text-[var(--color-accent)]">
         <component :is="tool.icon" class="size-6" aria-hidden="true" />
       </span>
       <span
         v-if="tool.isNew"
-        class="rounded-full border border-[var(--color-neon-magenta)] px-2 py-0.5 font-mono text-xs text-[var(--color-neon-magenta)]"
+        class="rounded-full border border-[var(--color-accent-magenta)] px-2 py-0.5 font-mono text-xs text-[var(--color-accent-magenta)]"
       >
         NEW
       </span>

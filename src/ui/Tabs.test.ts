@@ -99,9 +99,9 @@ describe('Tabs', () => {
     const wrapper = mountTabs()
     expect(wrapper.find('[role="tablist"]').classes()).toContain('overflow-x-auto')
     expect(wrapper.find('#tab-a').classes()).toContain('whitespace-nowrap')
-    // 活动态指示消费 accent（UI-SPEC：Tabs 活动态 cyan）
-    expect(wrapper.find('#tab-a').classes()).toContain('border-[var(--color-neon-cyan)]')
-    expect(wrapper.find('#tab-a').classes()).toContain('text-[var(--color-neon-cyan)]')
+    // 活动态指示消费 accent（UI-SPEC：Tabs 活动态 cyan；02-REVIEW CR-01 文本/选中改经 accent）
+    expect(wrapper.find('#tab-a').classes()).toContain('border-[var(--color-accent)]')
+    expect(wrapper.find('#tab-a').classes()).toContain('text-[var(--color-accent)]')
   })
 
   it('非激活面板以 hidden 属性存在（节点常驻 DOM 而非移除/透明化——RESEARCH Anti-Patterns）', () => {

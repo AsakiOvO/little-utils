@@ -25,7 +25,7 @@
     <div v-if="open" class="ml-3 border-l border-[var(--color-border)] pl-3">
       <template v-if="node.type === 'object'">
         <div v-for="(p, i) in node.properties" :key="i" class="flex items-start gap-1.5 py-px">
-          <span class="shrink-0 font-mono text-[var(--color-neon-cyan)]">"{{ p.key }}"</span>
+          <span class="shrink-0 font-mono text-[var(--color-accent)]">"{{ p.key }}"</span>
           <span class="shrink-0 text-[var(--color-text-muted)]">:</span>
           <JsonTree :node="p.value" :depth="depth + 1" />
         </div>
@@ -47,19 +47,19 @@
     </span>
     <template v-else-if="node.type === 'number'">
       <!-- raw 原文直出：数字显示永不经 JS number 中转 -->
-      <span class="break-all font-mono text-[var(--color-neon-yellow)]">{{ node.raw }}</span>
+      <span class="break-all font-mono text-[var(--color-accent-yellow)]">{{ node.raw }}</span>
       <span
         v-if="isUnsafeRawNumber(node.raw)"
-        class="shrink-0 rounded border border-[var(--color-neon-magenta)] px-1 text-xs text-[var(--color-neon-magenta)]"
+        class="shrink-0 rounded border border-[var(--color-accent-magenta)] px-1 text-xs text-[var(--color-accent-magenta)]"
         :title="PRECISION_HINT"
       >
         JS 精度不安全
       </span>
     </template>
-    <span v-else-if="node.type === 'boolean'" class="font-mono text-[var(--color-neon-magenta)]">
+    <span v-else-if="node.type === 'boolean'" class="font-mono text-[var(--color-accent-magenta)]">
       {{ node.value }}
     </span>
-    <span v-else class="font-mono text-[var(--color-neon-magenta)]">null</span>
+    <span v-else class="font-mono text-[var(--color-accent-magenta)]">null</span>
   </div>
 </template>
 

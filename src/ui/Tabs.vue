@@ -32,7 +32,7 @@
         class="inline-flex min-h-11 items-center whitespace-nowrap px-3 text-sm transition-colors"
         :class="
           activeId === tab.id
-            ? 'border-b-2 border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
+            ? 'border-b-2 border-[var(--color-accent)] text-[var(--color-accent)]'
             : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]'
         "
         @click="selectTab(tab.id)"

@@ -47,6 +47,18 @@
    暗色模式的 CSS 兜底会被 :root 声明反向覆盖 */
 :root {
   color-scheme: light;
+
+  /* ── accent 语义角色(D-09 组件层):文本/选中/反馈可安全消费的霓虹色(02-REVIEW CR-01)──
+     亮色取 D-07 深霓虹 *-deep(与 tokens.ts light 组逐字同步,tokens.test.ts 守护,≥4.5:1);
+     .dark 覆盖取霓虹原语(暗色下原语即文本安全值,D-12)。声明必须先于 .dark 块 ——
+     同特异性靠源顺序;*--deep 为亮暗同值字面深色(不随模式分流,组件一律经 accent* 消费),
+     组件文本/选中/反馈禁直连原语(同 T-02-02 焦点环纪律) */
+  --color-neon-cyan-deep: oklch(0.42 0.10 230);
+  --color-neon-magenta-deep: oklch(0.40 0.16 330);
+  --color-neon-yellow-deep: oklch(0.40 0.10 70);
+  --color-accent: var(--color-neon-cyan-deep);
+  --color-accent-magenta: var(--color-neon-magenta-deep);
+  --color-accent-yellow: var(--color-neon-yellow-deep);
 }
 
 /* ── ② 语义层 · 暗色(D-12:Phase 1 值一字不动,机制性搬迁自 @theme)── */
@@ -75,6 +87,11 @@
   /* glow · 暗色(Phase 1 原值逐字保留,值锁定) */
   --shadow-glow-cyan: 0 0 12px oklch(0.85 0.16 195 / 0.35);
   --shadow-glow-magenta: 0 0 12px oklch(0.72 0.24 330 / 0.3);
+
+  /* accent 语义角色 · 暗色(亮色声明在前,同特异性源顺序覆盖;原语即暗色文本安全值,D-12 锁定) */
+  --color-accent: var(--color-neon-cyan);
+  --color-accent-magenta: var(--color-neon-magenta);
+  --color-accent-yellow: var(--color-neon-yellow);
 
   color-scheme: dark;
 }

@@ -4,9 +4,11 @@
     <header class="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
       <div class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
         <RouterLink to="/" class="flex items-center gap-2">
-          <!-- 品牌 logo:Display 28px/600 归一(UI-SPEC Typography);cyan + glow-cyan 为品牌标识既有用法保留(D-08/Accent reserved) -->
+          <!-- 品牌 logo:Display 28px/600 归一(UI-SPEC Typography);D-08 原语豁免经 02-REVIEW CR-01 重新裁定:
+               logo 为真实文本内容(非装饰图形),亮色下原语青 1.37:1 < 大字 3:1 红线,改经 accent 消费
+               (亮=深霓虹 7.59:1,暗=原语,霓虹品牌感保留);glow-cyan 阴影为装饰非文本,保留 D-08 用法 -->
           <span
-            class="font-mono text-[28px] font-semibold tracking-tight text-[var(--color-neon-cyan)] shadow-[var(--shadow-glow-cyan)]"
+            class="font-mono text-[28px] font-semibold tracking-tight text-[var(--color-accent)] shadow-[var(--shadow-glow-cyan)]"
           >
             little-utils
           </span>

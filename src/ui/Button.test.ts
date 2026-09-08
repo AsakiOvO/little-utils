@@ -30,7 +30,8 @@ describe('Button', () => {
     expect(wrapper.classes()).toContain('min-h-11')
     expect(wrapper.classes()).toContain('border-[var(--color-border)]')
     expect(wrapper.classes()).toContain('hover:border-[var(--color-neon-cyan)]')
-    expect(wrapper.classes()).toContain('hover:text-[var(--color-neon-cyan)]')
+    // hover 文字经 accent 语义消费(02-REVIEW CR-01:亮色下原语青文本不达标)
+    expect(wrapper.classes()).toContain('hover:text-[var(--color-accent)]')
   })
 
   it("variant='ghost':无描边语言,含 hover 提亮底色(hover:bg-[var(--color-surface-raised)])", () => {

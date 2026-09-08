@@ -39,6 +39,6 @@ const variantClasses = computed(() => {
   if (props.variant === 'ghost') {
     return 'px-3 text-[var(--color-text-muted)] hover:bg-[var(--color-surface-raised)] hover:text-[var(--color-text-primary)]'
   }
-  return 'border border-[var(--color-border)] px-4 text-[var(--color-text-primary)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
+  return 'border border-[var(--color-border)] px-4 text-[var(--color-text-primary)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-accent)]'
 })
 </script>

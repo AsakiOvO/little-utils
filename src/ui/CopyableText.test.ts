@@ -88,9 +88,9 @@ describe('CopyableText（Clipboard API 可用路径）', () => {
     await button.trigger('click')
     await flushCopy()
 
-    // 成功态：按钮沿用 json-formatter 复制反馈语言（border/text neon-cyan），反馈可见
-    expect(button.classes()).toContain('border-[var(--color-neon-cyan)]')
-    expect(button.classes()).toContain('text-[var(--color-neon-cyan)]')
+    // 成功态：按钮沿用 json-formatter 复制反馈语言（border/text accent），反馈可见
+    expect(button.classes()).toContain('border-[var(--color-accent)]')
+    expect(button.classes()).toContain('text-[var(--color-accent)]')
     const feedback = wrapper.find('span[aria-live="polite"]')
     expect(feedback.text()).toBe('已复制')
     expect(feedback.classes()).not.toContain('sr-only')
@@ -98,7 +98,7 @@ describe('CopyableText（Clipboard API 可用路径）', () => {
     // copiedDuring 1500ms 窗口结束后随 useCopy copied 自动复原
     vi.advanceTimersByTime(1500)
     await nextTick()
-    expect(button.classes()).not.toContain('border-[var(--color-neon-cyan)]')
+    expect(button.classes()).not.toContain('border-[var(--color-accent)]')
     expect(button.classes()).toContain('border-[var(--color-border)]')
     expect(feedback.text()).toBe('')
     expect(feedback.classes()).toContain('sr-only')
@@ -119,7 +119,7 @@ describe('CopyableText（Clipboard API 可用路径）', () => {
     expect(feedback.text()).toBe('复制失败,请手动复制')
     expect(feedback.classes()).toContain('text-[var(--color-danger)]')
     // 失败不进成功态
-    expect(wrapper.find('button').classes()).not.toContain('border-[var(--color-neon-cyan)]')
+    expect(wrapper.find('button').classes()).not.toContain('border-[var(--color-accent)]')
   })
 
   it('backstop：1000+ 字文本展示区限高滚动（max-h-72/overflow-auto）且复制 payload 为全文（不截断于可见区）', async () => {

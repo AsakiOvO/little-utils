@@ -50,7 +50,7 @@
       <div
         v-if="forwardResult && !forwardResult.ok"
         role="alert"
-        class="rounded-lg border border-[var(--color-neon-magenta)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-primary)]"
+        class="rounded-lg border border-[var(--color-accent-magenta)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-primary)]"
       >
         {{ forwardResult.error }}
       </div>
@@ -61,7 +61,7 @@
         class="flex flex-col gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4"
       >
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <p class="font-mono text-sm text-[var(--color-neon-yellow)]">
+          <p class="font-mono text-sm text-[var(--color-accent-yellow)]">
             识别为{{ unitLabel(forwardResult.detectedUnit) }} · 原始输入「{{ tsInput }}」
           </p>
           <button
@@ -69,8 +69,8 @@
             class="rounded-md border px-2 py-1 text-xs transition-colors"
             :class="
               isCopied('__all__')
-                ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
-                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
+                ? 'border-[var(--color-accent)] text-[var(--color-accent)]'
+                : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-accent)]'
             "
             aria-label="复制全部结果文本"
             @click="copyValue('__all__', forwardFullText)"
@@ -143,7 +143,7 @@
       <div
         v-if="reverseResult && !reverseResult.ok"
         role="alert"
-        class="rounded-lg border border-[var(--color-neon-magenta)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-primary)]"
+        class="rounded-lg border border-[var(--color-accent-magenta)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-primary)]"
       >
         {{ reverseResult.error }}
       </div>

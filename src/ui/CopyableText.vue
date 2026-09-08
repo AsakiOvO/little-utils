@@ -20,8 +20,8 @@
       class="self-start inline-flex items-center gap-1 min-h-11 rounded-md border px-3 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40"
       :class="
         copied
-          ? 'border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)]'
-          : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-neon-cyan)]'
+          ? 'border-[var(--color-accent)] text-[var(--color-accent)]'
+          : 'border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-neon-cyan)] hover:text-[var(--color-accent)]'
       "
       :aria-label="text ? label : '暂无内容可复制'"
       :disabled="!text"
@@ -70,7 +70,7 @@ const feedback = computed<'idle' | 'success' | 'error'>(() => {
 })
 
 const feedbackClasses = computed(() => {
-  if (feedback.value === 'success') return 'text-sm text-[var(--color-neon-cyan)]'
+  if (feedback.value === 'success') return 'text-sm text-[var(--color-accent)]'
   if (feedback.value === 'error') return 'text-sm text-[var(--color-danger)]'
   return 'sr-only'
 })

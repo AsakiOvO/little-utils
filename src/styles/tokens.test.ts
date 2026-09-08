@@ -179,6 +179,26 @@ describe('tokens.css ↔ tokens.ts 同步断言(D-20)', () => {
   it('组件层 --color-focus 声明就位(D-19 焦点环语义角色,亮暗同值)', () => {
     expect(css).toContain('--color-focus: var(--color-neon-cyan);')
   })
+
+  it('D-07 深霓虹三色亮色声明与 tokens.ts light 组逐字一致(02-REVIEW CR-01 收口)', () => {
+    expect(css, FIX_HINT).toContain(`--color-neon-cyan-deep: ${tokens.light['neon-cyan-deep']};`)
+    expect(css, FIX_HINT).toContain(`--color-neon-magenta-deep: ${tokens.light['neon-magenta-deep']};`)
+    expect(css, FIX_HINT).toContain(`--color-neon-yellow-deep: ${tokens.light['neon-yellow-deep']};`)
+  })
+
+  it('accent 语义角色按模式分流(亮=deep / 暗=原语),且亮色声明先于 .dark(源顺序纪律)', () => {
+    expect(css).toContain('--color-accent: var(--color-neon-cyan-deep);')
+    expect(css).toContain('--color-accent-magenta: var(--color-neon-magenta-deep);')
+    expect(css).toContain('--color-accent-yellow: var(--color-neon-yellow-deep);')
+    expect(css).toContain('--color-accent: var(--color-neon-cyan);')
+    expect(css).toContain('--color-accent-magenta: var(--color-neon-magenta);')
+    expect(css).toContain('--color-accent-yellow: var(--color-neon-yellow);')
+    // 源顺序纪律:亮色 :root 声明必须先于 .dark 覆盖(同特异性靠源顺序,tokens.css 内注释同纪律)
+    const lightAccent = css.indexOf('--color-accent: var(--color-neon-cyan-deep);')
+    const darkBlockStart = css.search(/\n\.dark\s*\{/)
+    expect(lightAccent).toBeGreaterThanOrEqual(0)
+    expect(darkBlockStart).toBeGreaterThan(lightAccent)
+  })
 })
 
 // ── parseOklch 纯函数 ──────────────────────────────────────────────────
