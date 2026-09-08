@@ -514,22 +514,28 @@ it('reduced-motion 全局中和块（D-22）', () => {
 | A4 | `.dark` 块与 `:root` 特异性同为 (0,1,0)、靠源顺序覆盖 | Pattern 1 | 低——CSS 级联规范行为 [CITED]；且构建后目测验证兜底 |
 | A5 | reduced-motion 自动化只能做 CSS 内容断言（happy-dom 不计算媒体查询），行为正确性依赖 D-23 手动抽验 | Validation Architecture | 低——测试策略选择，非事实风险 |
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> 四问已全部在规划阶段裁定并编码进对应计划任务（2026-09-07 修订回写：补 inline RESOLVED 标记与计划出处，checker research_resolution 项）。原始问题与分析保留供溯源。
 
 1. **ThemeToggle 在 home.layout 的精确落位**
    - What we know: D-03 锁定「顶栏右上角」；现有 header 是 `justify-between`（logo | nav 文本）
    - What's unclear: nav 文本与 toggle 的组合方式（并列右侧 vs toggle 替换位置）
    - Recommendation: planner 定（两者均满足 D-03）；建议并列并给 toggle 独立 `ml-4`
+   - **RESOLVED → 02-02-PLAN.md Task 2:** 采并列方案——home.layout header 右侧 `<div class="flex items-center gap-4">` 包住现有 nav 与 `<ThemeToggle />`（toggle 在 nav 之后）；tool.layout 侧以 `ml-auto` 容器右推到顶栏右上角。
 2. **@codemirror/theme-one-dark 移除时机**
    - What we know: D-06 后无引用；check-chunks 断言 c 要求存在含 CM 的懒加载 chunk（与 oneDark 无关）
    - What's unclear: 是否与 D-06 同 PR 清理
    - Recommendation: 同任务清理（避免死依赖）；移除后跑全量构建+check-chunks 验证
+   - **RESOLVED → 02-05-PLAN.md Task 2:** 与 D-06 改造同一计划、独立收尾任务执行 `corepack pnpm remove @codemirror/theme-one-dark`（自动同步 lockfile），移除后复跑 `build && check:chunks` 卡口验证分包纪律。
 3. **base.css 16px 兜底是否扩展 `[contenteditable]`**
    - What we know: D-21 锁定 `input/select/textarea` 三选；本站暂无 contenteditable
    - Recommendation: 按 D-21 原文三选择器执行；contenteditable 留待真实需求
+   - **RESOLVED → 02-01-PLAN.md Task 2:** 按 D-21 原文三选择器执行，不扩展 `[contenteditable]`（base-rules.test.ts 断言的选择器组即三选择器）；contenteditable 留待真实需求。
 4. **亮色 `--color-border` 的具体值**
    - What we know: UI-SPEC 未给亮色 border 起点；原语灰阶未定
    - Recommendation: executor 在 D-07 策略内定（约 oklch(0.88 0.01 260) 起步），非文字用途不受 4.5:1 约束（UI 组件 3:1 若参与边界识别——Tabs 指示等消费 accent 不受影响）
+   - **RESOLVED → 02-01-PLAN.md Task 1:** 起点值 `oklch(0.88 0.01 260)` 已写入计划（tokens.css 亮色语义层）；executor 可在 D-07 策略内微调，微调后 tokens.css/tokens.ts/断言三处同步，非文字用途不受 4.5:1 约束。
 
 ## Environment Availability
 
