@@ -4,8 +4,9 @@
     <header class="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
       <div class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
         <RouterLink to="/" class="flex items-center gap-2">
+          <!-- 品牌 logo:Display 28px/600 归一(UI-SPEC Typography);cyan + glow-cyan 为品牌标识既有用法保留(D-08/Accent reserved) -->
           <span
-            class="font-mono text-lg font-bold tracking-tight text-[var(--color-neon-cyan)] shadow-[var(--shadow-glow-cyan)]"
+            class="font-mono text-[28px] font-semibold tracking-tight text-[var(--color-neon-cyan)] shadow-[var(--shadow-glow-cyan)]"
           >
             little-utils
           </span>
@@ -22,7 +23,7 @@
 
     <footer class="mt-auto border-t border-[var(--color-border)] bg-[var(--color-surface)]">
       <div
-        class="mx-auto w-full max-w-5xl px-4 py-4 text-center text-xs text-[var(--color-text-muted)]"
+        class="mx-auto w-full max-w-5xl px-4 py-4 text-center text-sm text-[var(--color-text-muted)]"
       >
         little-utils — 所有计算均在浏览器本地完成,数据不出浏览器
       </div>
