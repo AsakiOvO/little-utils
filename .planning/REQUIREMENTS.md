@@ -13,7 +13,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **SITE-02**: 用户可通过关键词搜索定位工具（fuse.js 本地模糊搜索，支持中英文关键词）
 - [ ] **SITE-03**: 用户可收藏常用工具并在首页置顶展示，可查看最近使用（localStorage 持久化，无需登录）
 - [x] **SITE-04**: 用户可切换暗色/亮色模式（默认暗色、跟随系统偏好、选择持久化）
-- [ ] **SITE-05**: 用户可在移动端正常使用全部核心功能（响应式，输入框 ≥16px 防 iOS 缩放，触控目标达标）
+- [x] **SITE-05**: 用户可在移动端正常使用全部核心功能（响应式，输入框 ≥16px 防 iOS 缩放，触控目标达标）
 - [ ] **SITE-06**: 每个输出类工具支持一键复制，站点明示"数据不离开浏览器"隐私声明
 
 ### 架构基建（Architecture）
@@ -47,7 +47,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **STYL-01**: 设计系统先行：Tailwind 4 `@theme` 定义霓虹青/品红/电光黄（oklch）设计令牌，霓虹文字对比度 ≥ 4.5:1
 - [ ] **STYL-02**: 首页与导航强风格化（glow/glitch/HUD，纯 CSS 动画，只动 opacity/transform）
-- [ ] **STYL-03**: 动效提供 `prefers-reduced-motion` 降级，工具操作区保持克制易读
+- [x] **STYL-03**: 动效提供 `prefers-reduced-motion` 降级，工具操作区保持克制易读
 - [ ] **STYL-04**: 亮暗双主题下赛博朋克氛围一致，装饰效果限定在装饰层（不污染工具区可读性）
 
 ### 差异化功能（Differentiators）
@@ -102,9 +102,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TOOL-01 | Phase 1 | Complete |
 | TOOL-02 | Phase 1 | Complete |
 | STYL-01 | Phase 2 | Pending |
-| STYL-03 | Phase 2 | Pending |
+| STYL-03 | Phase 2 | Complete |
 | SITE-04 | Phase 2 | Complete |
-| SITE-05 | Phase 2 | Pending |
+| SITE-05 | Phase 2 | Complete |
 | ARCH-03 | Phase 3 | Pending |
 | ARCH-05 | Phase 3 | Pending |
 | SITE-01 | Phase 4 | Pending |

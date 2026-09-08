@@ -71,7 +71,7 @@ Plans:
   4. 霓虹青/品红/电光黄以 oklch 设计令牌贯穿全站,主题文字对比度 ≥ 4.5:1(可测量验证)
   5. 输入框/卡片/按钮/Tabs/可复制文本域等基础组件就位,工具操作区无装饰干扰、克制易读
 
-**Plans**: 2/7 plans executed
+**Plans**: 3/7 plans executed
 
 Plans:
 **Wave 1**
@@ -81,7 +81,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 02-03-PLAN.md — 六件套 A:Button/Input/Card(44px/16px 默认层 + 错误态 aria)(Wave 2)
+- [x] 02-03-PLAN.md — 六件套 A:Button/Input/Card(44px/16px 默认层 + 错误态 aria)(Wave 2)
 - [ ] 02-04-PLAN.md — 六件套 B:CopyableText(useCopy 封装)/Tabs(WAI-ARIA 键盘导航)(Wave 2)
 - [ ] 02-05-PLAN.md — CodeMirror 双主题(cm-theme + Compartment)+ oneDark 移除(Wave 2)
 
@@ -201,7 +201,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. 应用骨架与工具注册表契约 | 5/5 | Complete    | 2026-09-07 |
-| 2. 设计系统与响应式/可访问性基线 | 2/7 | In Progress|  |
+| 2. 设计系统与响应式/可访问性基线 | 3/7 | In Progress|  |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
 | 5. 开发辅助工具批量补齐 | 0/TBD | Not started | - |
