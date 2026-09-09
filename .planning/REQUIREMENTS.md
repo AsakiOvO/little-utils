@@ -22,7 +22,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **ARCH-02**: 每个工具独立路由并懒加载（路由级代码分割，重依赖不进首屏 bundle）
 - [ ] **ARCH-03**: 构建期 SSG 预渲染每条工具路由为含 SEO meta 的静态 HTML，生成 sitemap.xml 与 robots.txt
 - [x] **ARCH-04**: 统一 XSS 消毒渲染管线（唯一渲染出口，ESLint 禁止 v-html/innerHTML 直插用户输入）
-- [ ] **ARCH-05**: 部署管线（EdgeOne Pages + 自定义域名 + 构建产物零第三方外链 + bundle 体积预算检查）
+- [x] **ARCH-05**: 部署管线（EdgeOne Pages + 自定义域名 + 构建产物零第三方外链 + bundle 体积预算检查）
 
 ### 开发辅助工具（Developer Tools）
 
@@ -106,7 +106,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SITE-04 | Phase 2 | Complete |
 | SITE-05 | Phase 2 | Complete |
 | ARCH-03 | Phase 3 | In Progress (meta 注入层已由 03-01 完成; sitemap/robots 待 03-02) |
-| ARCH-05 | Phase 3 | Pending |
+| ARCH-05 | Phase 3 | Complete |
 | SITE-01 | Phase 4 | Pending |
 | SITE-02 | Phase 4 | Pending |
 | SITE-03 | Phase 4 | Pending |

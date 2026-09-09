@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 current_phase: 3
 current_phase_name: 预渲染 SEO 与部署管线
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-09-09T07:14:04.715Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-09-09T07:39:17.087Z"
 last_activity: 2026-09-09
 last_activity_desc: Phase 3 execution started
-state_head: 708b3de3ed36e6a1b12e0093fb762defe85a9a7b
+state_head: b5c97c46cc0613ab1e3c0ae22b757e5f21c4fb64
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 15
-  completed_plans: 13
+  completed_plans: 14
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 ## Current Position
 
 Phase: 3 (预渲染 SEO 与部署管线) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-09-09 — Phase 3 execution started
 
@@ -72,6 +72,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02 P06 | 8 min | 3 tasks | 6 files |
 | Phase 02 P07 | 13min | 2 tasks | 1 files |
 | Phase 03 P01 | 40min | 3 tasks | 11 files |
+| Phase 3 P2 | 45min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -111,6 +112,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-07: 阶段终局门禁五项全绿(172 测试/type-check/lint/build 3 页预渲染/check:chunks OK)——ROADMAP SC-1..SC-5 中 SC-2/SC-3/暗色直开无闪烁待 D-23 四项人工抽验(验收载体 02-07-SUMMARY,preview http://localhost:4174/ 已就绪)
 - [Phase 3]: @unhead/vue 对齐 vite-ssg 28 内置集成版本 ^2.1.2，main.ts 交由 ViteSSG 内置 head 管理（双实例 headSymbol 失配会使 SSG meta 零落盘）
 - [Phase 3]: 工具页 SEO meta 走 useToolSeo 归拢层（route.meta.tool + SITE_URL 单源），新工具单句接入
+- [Phase 3]: 03-02: onFinished 注册表类型用局部结构断言——typeof import() 会把全组件图拉进 tsconfig.node 程序产生幽灵 DOM/别名报错
+- [Phase 3]: 03-02: check:all 聚合链用 test:unit:run(vitest run)——watch 态在非 CI TTY/EdgeOne 构建环境挂起;check:dist 殿后 build-only(Pitfall 7)
 
 ### Pending Todos
 
@@ -129,6 +132,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-09-09T07:14:04.646Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-09-09T07:39:17.016Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
