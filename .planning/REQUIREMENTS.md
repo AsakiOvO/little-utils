@@ -105,7 +105,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STYL-03 | Phase 2 | Complete |
 | SITE-04 | Phase 2 | Complete |
 | SITE-05 | Phase 2 | Complete |
-| ARCH-03 | Phase 3 | Pending |
+| ARCH-03 | Phase 3 | In Progress (meta 注入层已由 03-01 完成; sitemap/robots 待 03-02) |
 | ARCH-05 | Phase 3 | Pending |
 | SITE-01 | Phase 4 | Pending |
 | SITE-02 | Phase 4 | Pending |
