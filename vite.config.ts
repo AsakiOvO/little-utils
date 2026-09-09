@@ -21,7 +21,9 @@ export default defineConfig({
   ssgOptions: {
     // Phase 3 起：includedRoutes 过滤、onFinished 生成 sitemap、每路由 meta 验证
     includedRoutes(paths) {
-      return paths.filter((p) => !p.includes(':')) // 暂不预渲染 catch-all 404
+      // D-08:追加 '/404' 触发 catch-all 渲染出 dist/404.html（RESEARCH Pitfall 4;
+      // vue-router 将 '/404' 匹配到 /:pathMatch(.*)* → NotFound 组件,noindex meta 随组件落盘）
+      return [...paths.filter((p) => !p.includes(':')), '/404']
     },
     // D-05「绝对零闪烁」方案(RESEARCH §Pattern 3):每路由预渲染 HTML 的 html 标签默认挂 class="dark"
     // (暗色为默认主题),亮色用户由 index.html head 内联镜像脚本在首绘前移除类并写 color-scheme。

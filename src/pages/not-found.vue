@@ -14,3 +14,11 @@
     </RouterLink>
   </main>
 </template>
+
+<script setup lang="ts">
+// D-08:预渲染 HTML 仍生成（dist/404.html,EdgeOne 以 404 状态码服务）,但爬虫不收录。
+// 不设 canonical 与 description（RESEARCH Open Question 2 裁定:noindex 页 canonical 无意义）。
+import { useSeoMeta } from '@unhead/vue'
+
+useSeoMeta({ robots: 'noindex, nofollow', title: '页面不存在' })
+</script>
