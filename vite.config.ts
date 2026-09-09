@@ -42,7 +42,11 @@ export default defineConfig({
     // robots.txt 不放 public/(静态文件无法引用 SITE_URL,会硬编码域名违反 D-12)。
     async onFinished() {
       const jiti = createJiti(import.meta.url)
-      const registry = await jiti.import<typeof import('./src/tools/index')>('./src/tools/index.ts')
+      // 结构类型局部断言:不用 typeof import() 注解——那会把整个组件图拉进
+      // tsconfig.node 项目(无 DOM lib、无 @ 别名)产生幽灵类型错误(Rule 1 实证)。
+      const registry = (await jiti.import('./src/tools/index.ts')) as {
+        tools: Array<{ path: string }>
+      }
       const toolPaths = registry.tools.map((t) => t.path)
       await writeFile('dist/sitemap.xml', buildSitemapXml(['/', ...toolPaths], SITE_URL), 'utf8')
       await writeFile('dist/robots.txt', buildRobotsTxt(SITE_URL), 'utf8')
