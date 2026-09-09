@@ -7,8 +7,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
-import { buildRobotsTxt, buildSitemapXml } from './src/seo'
-import { SITE_URL } from './src/config/site'
+import { buildRobotsTxt, buildSitemapXml } from './src/seo/index.ts'
+import { SITE_URL } from './src/config/site.ts'
 
 // https://vite.dev/config/
 export default defineConfig({

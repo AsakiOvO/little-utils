@@ -14,6 +14,10 @@
     "module": "preserve",
     "moduleResolution": "bundler",
 
+    // vite.config.ts 以 .ts 扩展导入 src 纯函数模块（vite native configLoader
+    // 要求显式扩展，Vite 8 警告目录索引/无扩展导入）；noEmit 已开启，安全。
+    "allowImportingTsExtensions": true,
+
     // Include Node.js types and avoid accidentally including other `@types/*` packages.
     "types": ["node"],
 
