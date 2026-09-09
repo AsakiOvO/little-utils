@@ -14,7 +14,7 @@
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: 应用骨架与工具注册表契约** - Vite+Vue3+TS+Tailwind 脚手架、defineTool 注册表派生路由、XSS 消毒渲染管线,以 JSON 格式化 + 时间戳转换 2 个工具验证契约 (completed 2026-09-07)
-- [ ] **Phase 2: 设计系统与响应式/可访问性基线** - 三层设计令牌(对比度校验)、暗色模式、16px/44px 移动端规则、reduced-motion 降级、基础组件库
+- [x] **Phase 2: 设计系统与响应式/可访问性基线** - 三层设计令牌(对比度校验)、暗色模式、16px/44px 移动端规则、reduced-motion 降级、基础组件库 (completed 2026-09-09)
 - [ ] **Phase 3: 预渲染 SEO 与部署管线** - vite-ssg 每路由静态 HTML + meta、sitemap/robots、EdgeOne Pages 公网部署、零外链与体积预算
 - [ ] **Phase 4: 站点级体验(首页/搜索/收藏)** - 分类导航首页、fuse.js 搜索、收藏/最近使用、隐私声明
 - [ ] **Phase 5: 开发辅助工具批量补齐** - Base64/URL/UUID/哈希加密/正则/状态码/二维码 7 个工具批量交付
@@ -201,7 +201,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. 应用骨架与工具注册表契约 | 5/5 | Complete    | 2026-09-07 |
-| 2. 设计系统与响应式/可访问性基线 | 7/7 | In Progress|  |
+| 2. 设计系统与响应式/可访问性基线 | 7/7 | Complete    | 2026-09-09 |
 | 3. 预渲染 SEO 与部署管线 | 0/TBD | Not started | - |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
 | 5. 开发辅助工具批量补齐 | 0/TBD | Not started | - |
