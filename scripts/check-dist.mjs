@@ -7,8 +7,9 @@
 //                载入——本脚本禁止硬编码域名，D-12）。
 //   c) [ext-link] 零第三方外链：只提取资源加载向量——script src / link href / img src /
 //                iframe src / source src+srcset / video·audio src / use href+xlink:href 与
-//                CSS 文件内 url()；http(s) 绝对 URL 必须 SITE_URL 前缀，相对路径与
-//                data:/blob:/#锚点 放行；显式排除 xmlns* 属性值（RESEARCH Pitfall 3：实测每页含
+//                CSS 文件内 url()；http(s) 绝对 URL 必须 URL origin === SITE_URL origin
+//                （origin 精确比较，裸 startsWith 会被 little-utils.pages.dev.evil.com 子域仿冒
+//                与明文 http 降级绕过），相对路径与 data:/blob:/#锚点 放行；显式排除 xmlns* 属性值（RESEARCH Pitfall 3：实测每页含
 //                http://www.w3.org/2000/svg——SVG 命名空间标识符非网络请求，全文 https?://
 //                正则必误报，禁止）。
 //   d) [gzip]    首包 gzip 预算（D-17 硬卡）：gzipSync(dist/index.html) + 入口页 HTML 直接引用
@@ -174,6 +175,19 @@ const RESOURCE_ATTR_PATTERNS = [
 ]
 const CSS_URL_PATTERN = /url\(\s*['"]?([^'")]+)['"]?\s*\)/gi
 
+// SITE_URL origin 预解析一次；断言用 URL origin 精确比较而非裸字符串前缀——
+// 子域仿冒（https://little-utils.pages.dev.evil.com/）与明文 http 降级均被正确拒绝。
+const SITE_ORIGIN = new URL(SITE_URL).origin
+
+/** 是否为站点自身资源 URL：解析成功且 origin（协议 + 主机）与 SITE_URL 完全一致 */
+function isSiteUrl(v) {
+  try {
+    return new URL(v).origin === SITE_ORIGIN
+  } catch {
+    return false
+  }
+}
+
 function checkExternalValue(value, source) {
   const v = value.trim()
   if (!v) return
@@ -183,7 +197,7 @@ function checkExternalValue(value, source) {
   // 相对路径 / data: / blob: / 锚点 / mailto / javascript 伪协议放行
   if (/^(data:|blob:|#|mailto:|javascript:)/i.test(v)) return
   if (/^https?:\/\//i.test(v)) {
-    if (!v.startsWith(SITE_URL)) {
+    if (!isSiteUrl(v)) {
       violations.push(
         `VIOLATION [ext-link]: ${source} 发现第三方资源 URL: ${v}（T-03-03 零外链断言）`,
       )
