@@ -77,6 +77,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useToolSeo } from '../../composables/useToolSeo' // D-05：工具页标准 meta 集归拢层
 import Button from '../../ui/Button.vue'
 import CopyableText from '../../ui/CopyableText.vue'
 import Card from '../../ui/Card.vue'
@@ -96,6 +97,8 @@ type ParseOutcome =
   | { ok: true; formatted: string; minified: string; tree: TreeNode }
   | { ok: false; error: JsonError }
   | null
+
+useToolSeo() // D-05：单句调用注入 title/description/canonical/og 标准集（数据来自 route.meta.tool）
 
 const input = ref('')
 
