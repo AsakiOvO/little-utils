@@ -11,8 +11,11 @@ import { SITE_URL } from '@/config/site'
 
 export function useToolSeo() {
   const route = useRoute()
+  // 守卫 1：无路由上下文（组件测试直接挂载工具页）时 useRoute() 返回 undefined，
+  // meta 注入无从谈起，直接跳过（与既有渲染逻辑零耦合）
+  if (!route) return
   const tool = route.meta.tool
-  // 守卫：非工具路由（home/404 等无 meta.tool）误用时直接 return，不注入工具页 meta
+  // 守卫 2：非工具路由（home/404 等无 meta.tool）误用时直接 return，不注入工具页 meta
   if (!tool) return
   useSeoMeta({
     title: tool.name, // titleTemplate 在 App 级补「 - little-utils」（D-06 半角连字符）
