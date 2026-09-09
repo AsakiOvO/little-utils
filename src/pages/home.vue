@@ -42,10 +42,26 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useHead } from '@unhead/vue'
 import { toolsByCategory } from '../tools'
 import ToolCard from '../components/ToolCard.vue'
 // D-18:按需显式 import,无 barrel(D-15 home 空态卡消费 Card)
 import Card from '../ui/Card.vue'
+
+// D-06:首页 title 保留全角破折号（与 index.html:29 静态兜底同值）;
+// titleTemplate: null discharge App 级「 - little-utils」半角模板,防止渲染成「…工具箱 - little-utils」双后缀。
+// D-10:description 为 Claude 起草文案,验收时人工确认。
+useHead({
+  title: 'little-utils — 开发者 & 办公工具箱',
+  titleTemplate: null,
+  meta: [
+    {
+      name: 'description',
+      content:
+        '面向开发者与办公场景的免费在线工具箱，JSON 格式化、时间戳转换等常用工具即开即用，全部在浏览器本地完成，数据不上传、无需登录。',
+    },
+  ],
+})
 
 const categories = computed(() => toolsByCategory())
 const hasAnyTool = computed(() => categories.value.some((c) => c.tools.length > 0))

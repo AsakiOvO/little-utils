@@ -183,8 +183,11 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useToolSeo } from '../../composables/useToolSeo' // D-05：工具页标准 meta 集归拢层
 import { useCopy } from '../../composables/useCopy'
 import { fromTimestamp, toTimestamp, type DetectedUnit } from './timestamp-converter.service'
+
+useToolSeo() // D-05：单句调用注入 title/description/canonical/og 标准集（数据来自 route.meta.tool）
 
 const { copy, copied } = useCopy()
 // 多行结果各自反馈:记录最后复制行的 key,copied 窗口内该行显示「已复制」
