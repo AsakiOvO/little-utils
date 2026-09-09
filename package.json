@@ -13,7 +13,7 @@
     "check:chunks": "node scripts/check-chunks.mjs",
     "check:dist": "node scripts/check-dist.mjs",
     "test:unit:run": "vitest run",
-    "check:all": "run-s test:unit:run type-check lint check:chunks build-only check:dist",
+    "check:all": "run-s test:unit:run type-check lint build-only check:chunks check:dist",
     "type-check": "vue-tsc --build",
     "lint": "run-s \"lint:*\"",
     "lint:oxlint": "oxlint . --fix",
