@@ -1,7 +1,9 @@
 // scripts/check-dist.mjs — dist 产物四类断言门禁（ARCH-03/ARCH-05，Plan 03-02 Task 3，D-17/D-18）
 //   a) [meta]    每页 meta 非空：全部 dist/*.html <title> 非空；工具页 title 以「 - little-utils」
 //                结尾且含注册表 tool.name；meta description 非空且 === 注册表 ToolMeta.description
-//                （D-09 单源断言）；dist/404.html 特例：含 noindex（D-08）。
+//                （D-09 单源断言）；canonical 与 og:url 均存在且 === SITE_URL + tool.path
+//                （D-12 单源断言——canonical 缺失是最常见 SEO 静默回归）；dist/404.html
+//                特例：含 noindex（D-08）。
 //   b) [sitemap] sitemap ↔ 注册表集合双向相等（防漏收录 + 防多收录）；/404 不在 sitemap（D-08）；
 //                robots.txt 的 Sitemap 行 === SITE_URL 派生值（SITE_URL 经 jiti 从 src/config/site.ts
 //                载入——本脚本禁止硬编码域名，D-12）。
@@ -113,6 +115,24 @@ if (!existsSync(distDir)) {
       } else if (desc !== tool.description) {
         violations.push(
           `VIOLATION [meta]: ${slug} description 与注册表 ToolMeta.description 不一致（D-09 单源）: "${desc}"`,
+        )
+      }
+      // canonical 与 og:url 存在性 + D-12 单源断言（useToolSeo 交付物）——
+      // canonical 缺失是 SEO 回归最常见的静默破坏点，门禁必须显式覆盖。
+      // 两种属性顺序都匹配（rel/href 与 href/rel）；og:url 期望值 === SITE_URL + tool.path。
+      const expected = `${SITE_URL}${tool.path}`
+      const canonical =
+        /<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]*)"/i.exec(html) ??
+        /<link\b[^>]*\bhref="([^"]*)"[^>]*\brel="canonical"/i.exec(html)
+      if (!canonical || canonical[1] !== expected) {
+        violations.push(
+          `VIOLATION [meta]: ${slug} canonical 缺失或不等于 SITE_URL+path（D-12）: "${canonical ? canonical[1] : ''}"`,
+        )
+      }
+      const ogUrl = /<meta\b[^>]*\bproperty="og:url"[^>]*\bcontent="([^"]*)"/i.exec(html)
+      if (!ogUrl || ogUrl[1] !== expected) {
+        violations.push(
+          `VIOLATION [meta]: ${slug} og:url 缺失或不等于 SITE_URL+path（D-12）: "${ogUrl ? ogUrl[1] : ''}"`,
         )
       }
     }
