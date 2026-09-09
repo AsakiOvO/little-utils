@@ -404,14 +404,14 @@ useHead({
 | A4 | useSeoMeta 在 vite-ssg 渲染进程中（client 子路径 createHead）能正常落盘 meta（Context7 官方文档支持 + unhead SPA 指南建议 rg 验证，但 unhead 3.x + vite-ssg 28 组合的端到端行为以计划首个 fail-first 任务实证为准） | Pattern 1 | 中——若落盘失败需改用 /server 导出或 onPageRendered 钩子兜底；计划首个任务应是"最小 meta 落盘验证" |
 | A5 | EdgeOne 免费层「全球可用区（不含中国大陆）」下自定义域名绑定对个人开放、无需备案（官方域名概览文档确认该区域"不要求工信部备案"，与 STACK.md 一致） | Pitfall 1 | 低 |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **SC-3 大陆实测与 D-01 默认域名路径的冲突如何取舍？**（最重要）
+1. **SC-3 大陆实测与 D-01 默认域名路径的冲突如何取舍？**（最重要）— RESOLVED: 用户拍板 D-20（03-CONTEXT.md）——SC-3 拆分验收：本阶段验收「部署管线+全球域名可达（curl）」，大陆无代理实测挂起至自定义域名绑定后（human-check，不阻塞本阶段）；03-03-PLAN Task 3 按此登记。
    - What we know: 官方文档明确默认域名大陆不能直接访问（3h 预览链接，401）；免备案自定义域名（全球不含大陆）可获稳定访问。
    - What's unclear: 作者是否愿意在 Phase 3 就注册/绑定自定义域名（提前进本阶段），还是接受 SC-3 拆分为「默认域名阶段全球可达 + 大陆实测挂起至自定义域名绑定后」。
    - Recommendation: planning 时加 checkpoint:human-verify，由作者二选一；两条路径的代码工作量完全相同（SITE_URL 单源已就绪），差异只在验收顺序。
-2. **404 页是否需要 canonical？** D-05 标准集针对工具页；404 noindex 页给 canonical 无意义。建议 404 只设 robots noindex + title，进计划时按此执行（discretion 已覆盖）。
-3. **sitemap 是否包含 lastmod？** 可选字段；ToolMeta.createdAt 可派生但语义是"收录日"而非"修改日"。建议最小集（仅 loc），Phase 5+ 有真实更新语义再补。
+2. **404 页是否需要 canonical？** — RESOLVED: 不加 canonical（03-01-PLAN Task 3 显式引用本裁定执行：404 仅 robots noindex + title）。D-05 标准集针对工具页；404 noindex 页给 canonical 无意义。建议 404 只设 robots noindex + title，进计划时按此执行（discretion 已覆盖）。
+3. **sitemap 是否包含 lastmod？** — RESOLVED: 最小集（仅 loc），03-02-PLAN Task 1/2 按此实现。可选字段；ToolMeta.createdAt 可派生但语义是"收录日"而非"修改日"。Phase 5+ 有真实更新语义再补。
 
 ## Environment Availability
 
