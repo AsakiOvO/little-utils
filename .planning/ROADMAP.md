@@ -109,7 +109,7 @@ Plans:
   4. 构建产物零第三方外链(字体自托管、依赖全本地打包),首包 gzip ≤ 200KB 体积预算检查通过
   5. 推送代码后站点自动构建并部署,新增工具页自动获得 meta 与 sitemap 收录
 
-**Plans**: 2/3 plans executed
+**Plans**: 3/3 plans executed
 
 Plans:
 **Wave 1**
@@ -122,7 +122,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 03-03-PLAN.md — GitHub/EdgeOne 部署上线（blocking-human）+ SITE_URL 修正闭环 + 公网 curl 验收与 D-04/D-20 人工验收（Wave 3）
+- [x] 03-03-PLAN.md — GitHub/EdgeOne 部署上线（blocking-human）+ SITE_URL 修正闭环 + 公网 curl 验收与 D-04/D-20 人工验收（Wave 3）
 
 ### Phase 4: 站点级体验(首页/搜索/收藏/信任)
 
@@ -215,7 +215,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 1. 应用骨架与工具注册表契约 | 5/5 | Complete    | 2026-09-07 |
 | 2. 设计系统与响应式/可访问性基线 | 7/7 | Complete    | 2026-09-09 |
-| 3. 预渲染 SEO 与部署管线 | 2/3 | In Progress|  |
+| 3. 预渲染 SEO 与部署管线 | 3/3 | In Progress|  |
 | 4. 站点级体验(首页/搜索/收藏) | 0/TBD | Not started | - |
 | 5. 开发辅助工具批量补齐 | 0/TBD | Not started | - |
 | 6. 赛博朋克视觉强化(首页/导航) | 0/TBD | Not started | - |

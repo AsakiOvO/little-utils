@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 current_phase: 3
 current_phase_name: 预渲染 SEO 与部署管线
-status: executing
-stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-09-09T07:39:17.087Z"
+status: verifying
+stopped_at: Completed 03-03-PLAN.md
+last_updated: "2026-09-09T09:05:49.411Z"
 last_activity: 2026-09-09
 last_activity_desc: Phase 3 execution started
-state_head: b5c97c46cc0613ab1e3c0ae22b757e5f21c4fb64
+state_head: 7ae5b539f76086106880962fa6e86468d6cb53f1
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 15
-  completed_plans: 14
+  completed_plans: 15
   percent: 25
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-09-04)
 
 Phase: 3 (预渲染 SEO 与部署管线) — EXECUTING
 Plan: 3 of 3
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-09-09 — Phase 3 execution started
 
 Progress: [███░░░░░░░] 25%
@@ -73,6 +73,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02 P07 | 13min | 2 tasks | 1 files |
 | Phase 03 P01 | 40min | 3 tasks | 11 files |
 | Phase 3 P2 | 45min | 3 tasks | 6 files |
+| Phase 3 P03-03 | 90min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -114,6 +115,9 @@ Recent decisions affecting current work:
 - [Phase 3]: 工具页 SEO meta 走 useToolSeo 归拢层（route.meta.tool + SITE_URL 单源），新工具单句接入
 - [Phase 3]: 03-02: onFinished 注册表类型用局部结构断言——typeof import() 会把全组件图拉进 tsconfig.node 程序产生幽灵 DOM/别名报错
 - [Phase 3]: 03-02: check:all 聚合链用 test:unit:run(vitest run)——watch 态在非 CI TTY/EdgeOne 构建环境挂起;check:dist 殿后 build-only(Pitfall 7)
+- [Phase 3]: 03-03: 部署平台 EdgeOne Pages 换为 Cloudflare Pages（Rule 4 用户决策——腾讯国际版实名认证不可行）；构建命令 pnpm check:all + 输出 dist + NODE_VERSION/PNPM_VERSION 环境变量，D-14/D-15 缓解等效迁移
+- [Phase 3]: 03-03: SITE_URL 单源修正为 https://little-utils.pages.dev 并重部署——canonical/og:url/sitemap/robots 四消费方公网 curl 验证同步（D-11/D-12 换源机制首次真实验证）
+- [Phase 3]: 03-03: D-02 路径落定——Cloudflare Pages 全球可达，ICP 备案不再阻塞部署路径；D-04 sitemap 提交与 D-20 大陆实测登记为 deferred（deferred-items.md）
 
 ### Pending Todos
 
@@ -121,17 +125,18 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 3 规划时]: ICP 备案与否需作者显式确认(影响大陆可用区 vs 全球不含大陆;两条路径代码零差异)
+- ~~[Phase 3 规划时]: ICP 备案与否需作者显式确认~~ — 已清账（03-03）：D-02 路径落定为 Cloudflare Pages 全球可达，ICP 备案不再阻塞
 - [Phase 8 规划时]: 图片压缩 EXIF/HEIC/Worker 与 marked+DOMPurify 集成需专项调研(research flag)
 
 ## Deferred Items
 
 | Category | Item | Status | Deferred At | Milestone |
 |----------|------|--------|-------------|-----------|
-| *(none)* | | | | |
+| SEO | D-04 sitemap 提交（Google Search Console + 百度站长平台） | 挂起（用户 SKIP，随时可执行） | 03-03 | 后续任意时点 |
+| 验收 | D-20 大陆无代理实测 | 挂起（条件：自定义域名绑定后） | 03-03 | 条件满足时 |
 
 ## Session Continuity
 
-Last session: 2026-09-09T07:39:17.016Z
-Stopped at: Completed 03-02-PLAN.md
+Last session: 2026-09-09T09:05:49.333Z
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
